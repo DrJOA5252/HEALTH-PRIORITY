@@ -1,0 +1,3123 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Health Priority | Riesgo Cardiovascular en Futbolistas</title>
+  <meta name="description" content="Estratificación de riesgo cardiovascular, respiratorio y mental para futbolistas de alto rendimiento." />
+  <meta name="theme-color" content="#0f172a" />
+  <link rel="manifest" href="/manifest.json" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+/* ============================================================
+   Health Priority — styles.css
+   Design: dark mode, glassmorphism, premium UI
+   Fuente principal: Inter (Google Fonts)
+============================================================ */
+
+/* ── VARIABLES ──────────────────────────────────────────── */
+:root {
+  --bg:          #0b1120;
+  --bg-surface:  #111827;
+  --bg-card:     rgba(17, 24, 39, 0.8);
+  --bg-hover:    rgba(255,255,255,0.04);
+  --border:      rgba(255,255,255,0.08);
+  --border-focus:rgba(99,102,241,0.6);
+
+  --text-primary: #f1f5f9;
+  --text-muted:   #94a3b8;
+  --text-dim:     #64748b;
+
+  --accent:      #6366f1;
+  --accent-dark: #4f46e5;
+  --accent-glow: rgba(99,102,241,0.25);
+
+  --green:       #22c55e;
+  --green-dim:   rgba(34,197,94,0.15);
+  --yellow:      #f59e0b;
+  --yellow-dim:  rgba(245,158,11,0.15);
+  --red:         #ef4444;
+  --red-dim:     rgba(239,68,68,0.15);
+
+  --radius-sm:   8px;
+  --radius:      14px;
+  --radius-lg:   20px;
+
+  --shadow:      0 4px 24px rgba(0,0,0,0.4);
+  --shadow-card: 0 8px 32px rgba(0,0,0,0.5);
+
+  --transition:  all 0.2s ease;
+}
+
+/* ── RESET / BASE ───────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { font-size: 16px; scroll-behavior: smooth; }
+
+body {
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  background: var(--bg);
+  color: var(--text-primary);
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+  line-height: 1.5;
+}
+
+/* ── HEADER ─────────────────────────────────────────────── */
+.app-header {
+  background: rgba(11,17,32,0.9);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.header-inner {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0.75rem 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.logo-icon {
+  font-size: 1.75rem;
+  filter: drop-shadow(0 0 8px rgba(239,68,68,0.5));
+  animation: heartbeat 2s ease-in-out infinite;
+}
+
+@keyframes heartbeat {
+  0%, 100% { transform: scale(1); }
+  14%       { transform: scale(1.1); }
+  28%       { transform: scale(1); }
+  42%       { transform: scale(1.08); }
+  70%       { transform: scale(1); }
+}
+
+.logo-title {
+  display: block;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  letter-spacing: -.5px;
+}
+
+.logo-sub {
+  display: block;
+  font-size: 0.7rem;
+  font-weight: 400;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: .5px;
+}
+
+.header-badge {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.75rem;
+  color: var(--green);
+  background: var(--green-dim);
+  border: 1px solid rgba(34,197,94,0.25);
+  padding: 0.3rem 0.7rem;
+  border-radius: 100px;
+}
+
+.pulse-dot {
+  width: 7px; height: 7px;
+  background: var(--green);
+  border-radius: 50%;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50%       { opacity: 0.5; transform: scale(0.85); }
+}
+
+/* ── DISCLAIMER ─────────────────────────────────────────── */
+.disclaimer-bar {
+  background: rgba(245,158,11,0.1);
+  border-bottom: 1px solid rgba(245,158,11,0.2);
+  text-align: center;
+  font-size: 0.78rem;
+  color: var(--yellow);
+  padding: 0.45rem 1rem;
+}
+
+/* ── LAYOUT ──────────────────────────────────────────────── */
+.app-layout {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 1.5rem 1.25rem 3rem;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+}
+
+@media (min-width: 1024px) {
+  .app-layout {
+    grid-template-columns: 1fr 420px;
+    align-items: start;
+  }
+}
+
+/* ── STEP NAV ────────────────────────────────────────────── */
+.step-nav {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  margin-bottom: 1.25rem;
+  overflow-x: auto;
+  padding-bottom: 0.25rem;
+  scrollbar-width: none;
+}
+
+.step-nav::-webkit-scrollbar { display: none; }
+
+.step-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.4rem 0.6rem;
+  flex-shrink: 0;
+}
+
+.step-num {
+  width: 32px; height: 32px;
+  border-radius: 50%;
+  background: var(--bg-surface);
+  border: 2px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text-dim);
+  transition: var(--transition);
+}
+
+.step-label {
+  font-size: 0.65rem;
+  color: var(--text-dim);
+  font-weight: 500;
+  white-space: nowrap;
+  transition: var(--transition);
+}
+
+.step-btn.active .step-num {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+  box-shadow: 0 0 12px var(--accent-glow);
+}
+
+.step-btn.active .step-label { color: var(--accent); }
+
+.step-btn.done .step-num {
+  background: var(--green-dim);
+  border-color: var(--green);
+  color: var(--green);
+}
+
+.step-btn.done .step-label { color: var(--green); }
+
+.step-connector {
+  flex: 1;
+  height: 2px;
+  min-width: 24px;
+  background: var(--border);
+  margin-bottom: 1.2rem;
+}
+
+/* ── FORM STEPS ─────────────────────────────────────────── */
+.form-step { display: none; }
+.form-step.active { display: block; animation: fadeIn 0.3s ease; }
+
+@keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+
+/* ── CARD ──────────────────────────────────────────────── */
+.card {
+  background: var(--bg-card);
+  backdrop-filter: blur(12px);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 1.5rem;
+  box-shadow: var(--shadow-card);
+}
+
+.card-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.25rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.card-icon {
+  width: 48px; height: 48px;
+  border-radius: var(--radius);
+  background: color-mix(in srgb, var(--icon-color) 15%, transparent);
+  border: 1px solid color-mix(in srgb, var(--icon-color) 30%, transparent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.4rem;
+  flex-shrink: 0;
+}
+
+.card-kicker {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: .8px;
+  color: var(--text-dim);
+  font-weight: 600;
+  margin-bottom: 0.2rem;
+}
+
+.card-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  line-height: 1.2;
+}
+
+.section-info {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  background: rgba(99,102,241,0.07);
+  border: 1px solid var(--border-focus);
+  border-radius: var(--radius-sm);
+  padding: 0.6rem 0.85rem;
+  margin-bottom: 1.25rem;
+  line-height: 1.6;
+}
+
+.form-sub-title {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: .6px;
+  margin: 1.25rem 0 0.6rem;
+}
+
+/* ── FIELDS ──────────────────────────────────────────────── */
+.field-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+  margin-bottom: 0.25rem;
+}
+
+@media (min-width: 600px) {
+  .field-grid { grid-template-columns: 1fr 1fr; }
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.field-label {
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: var(--text-muted);
+}
+
+.required { color: var(--red); }
+
+.field-hint {
+  font-size: 0.72rem;
+  color: var(--text-dim);
+}
+
+input[type="text"],
+input[type="number"],
+select {
+  width: 100%;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 0.6rem 0.85rem;
+  color: var(--text-primary);
+  font-size: 0.9rem;
+  font-family: inherit;
+  transition: var(--transition);
+  appearance: none;
+  -webkit-appearance: none;
+}
+
+select {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%2364748b' viewBox='0 0 16 16'%3E%3Cpath d='M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.75rem center;
+  padding-right: 2rem;
+}
+
+input:focus, select:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-glow);
+}
+
+input:invalid:not(:placeholder-shown) {
+  border-color: var(--red);
+}
+
+/* ── TOGGLES / CHECKBOXES ────────────────────────────────── */
+.toggle-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+@media (min-width: 600px) {
+  .toggle-grid { grid-template-columns: 1fr 1fr; }
+}
+
+.toggle {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.7rem;
+  padding: 0.65rem 0.85rem;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+  cursor: pointer;
+  transition: var(--transition);
+  background: transparent;
+}
+
+.toggle:hover { background: var(--bg-hover); border-color: rgba(255,255,255,0.14); }
+
+.toggle input[type="checkbox"] { display: none; }
+
+.toggle-box {
+  width: 18px; height: 18px;
+  border-radius: 4px;
+  border: 2px solid var(--text-dim);
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 1px;
+  transition: var(--transition);
+}
+
+.toggle input:checked ~ .toggle-box {
+  background: var(--accent);
+  border-color: var(--accent);
+}
+
+.toggle input:checked ~ .toggle-box::after {
+  content: '';
+  display: block;
+  width: 4px; height: 8px;
+  border: 2px solid #fff;
+  border-top: none;
+  border-left: none;
+  transform: rotate(45deg) translateY(-1px);
+}
+
+.toggle-text {
+  font-size: 0.83rem;
+  color: var(--text-muted);
+  line-height: 1.4;
+  transition: var(--transition);
+}
+
+.toggle input:checked ~ .toggle-text { color: var(--text-primary); }
+
+.toggle.red-flag-item { border-color: rgba(239,68,68,0.2); }
+.toggle.red-flag-item:hover { border-color: rgba(239,68,68,0.4); background: rgba(239,68,68,0.04); }
+.toggle.red-flag-item input:checked ~ .toggle-box {
+  background: var(--red);
+  border-color: var(--red);
+}
+
+/* ── BADGES ──────────────────────────────────────────────── */
+.badge {
+  display: inline-block;
+  font-size: 0.65rem;
+  font-weight: 700;
+  font-style: normal;
+  border-radius: 100px;
+  padding: 0.1rem 0.4rem;
+  margin-left: 0.4rem;
+  text-transform: uppercase;
+  letter-spacing: .4px;
+}
+
+.badge-red {
+  background: var(--red-dim);
+  color: var(--red);
+  border: 1px solid rgba(239,68,68,0.3);
+}
+
+/* ── UPLOAD ──────────────────────────────────────────────── */
+.upload-zone {
+  border: 2px dashed var(--border);
+  border-radius: var(--radius);
+  padding: 2.5rem 1.5rem;
+  text-align: center;
+  cursor: pointer;
+  position: relative;
+  transition: var(--transition);
+  margin-bottom: 1rem;
+}
+
+.upload-zone:hover, .upload-zone.drag-over {
+  border-color: var(--accent);
+  background: var(--accent-glow);
+}
+
+.upload-icon { font-size: 2.5rem; display: block; margin-bottom: 0.75rem; }
+.upload-text { font-size: 0.9rem; color: var(--text-muted); margin-bottom: 0.25rem; }
+.upload-link { color: var(--accent); text-decoration: underline; cursor: pointer; }
+.upload-hint { font-size: 0.75rem; color: var(--text-dim); }
+.upload-input {
+  position: absolute; top: 0; left: 0;
+  width: 100%; height: 100%;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.file-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.file-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.5rem 0.75rem;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  font-size: 0.82rem;
+  color: var(--text-muted);
+}
+
+.file-item-icon { font-size: 1rem; }
+
+.upload-status {
+  padding: 0.6rem 0.85rem;
+  border-radius: var(--radius-sm);
+  font-size: 0.82rem;
+  margin-bottom: 0.75rem;
+}
+
+.upload-status.success { background: var(--green-dim); color: var(--green); border: 1px solid rgba(34,197,94,0.3); }
+.upload-status.error   { background: var(--red-dim); color: var(--red); border: 1px solid rgba(239,68,68,0.3); }
+
+
+
+/* ── STEP ACTIONS ────────────────────────────────────────── */
+.step-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 1.5rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border);
+}
+
+/* ── BOTONES ──────────────────────────────────────────────── */
+.btn-primary, .btn-secondary, .btn-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  border-radius: var(--radius-sm);
+  font-family: inherit;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition);
+  border: none;
+  white-space: nowrap;
+}
+
+.btn-primary {
+  background: var(--accent);
+  color: #fff;
+  padding: 0.6rem 1.2rem;
+  font-size: 0.88rem;
+}
+
+.btn-primary:hover { background: var(--accent-dark); box-shadow: 0 0 16px var(--accent-glow); }
+.btn-primary:disabled { opacity: 0.5; cursor: not-allowed; }
+
+.btn-secondary {
+  background: rgba(255,255,255,0.06);
+  color: var(--text-muted);
+  padding: 0.6rem 1.1rem;
+  font-size: 0.88rem;
+  border: 1px solid var(--border);
+}
+
+.btn-secondary:hover { background: var(--bg-hover); color: var(--text-primary); }
+
+.btn-small { padding: 0.4rem 0.8rem; font-size: 0.8rem; }
+
+.btn-cta {
+  background: linear-gradient(135deg, #6366f1, #8b5cf6);
+  color: #fff;
+  padding: 0.75rem 1.5rem;
+  font-size: 0.95rem;
+  box-shadow: 0 4px 20px rgba(99,102,241,0.35);
+}
+
+.btn-cta:hover { transform: translateY(-1px); box-shadow: 0 6px 28px rgba(99,102,241,0.5); }
+.btn-cta:active { transform: none; }
+.btn-cta:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+
+.btn-cta-icon { font-size: 1rem; }
+
+/* ── RESULT PANEL ────────────────────────────────────────── */
+.result-panel {
+  position: sticky;
+  top: 5rem;
+}
+
+.result-empty {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 3rem 1.5rem;
+  text-align: center;
+  box-shadow: var(--shadow-card);
+}
+
+.empty-icon { font-size: 2.5rem; margin-bottom: 0.75rem; }
+.empty-title { font-size: 1rem; font-weight: 600; color: var(--text-muted); }
+.empty-sub { font-size: 0.8rem; color: var(--text-dim); margin-top: 0.4rem; line-height: 1.6; }
+
+.result-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-card);
+  animation: fadeIn 0.4s ease;
+}
+
+/* Colores del resultado */
+.result-card.risk-VERDE   { border-color: rgba(34,197,94,0.35); }
+.result-card.risk-AMARILLO { border-color: rgba(245,158,11,0.35); }
+.result-card.risk-ROJO    { border-color: rgba(239,68,68,0.35); }
+
+/* Semáforo */
+.traffic-light-container {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  padding: 1.25rem 1.5rem;
+  border-bottom: 1px solid var(--border);
+  background: rgba(255,255,255,0.02);
+}
+
+.traffic-light {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  background: #0a0f1e;
+  padding: 8px 6px;
+  border-radius: 20px;
+  border: 1px solid rgba(255,255,255,0.1);
+}
+
+.tl-light {
+  width: 22px; height: 22px;
+  border-radius: 50%;
+  opacity: 0.18;
+  transition: opacity 0.4s ease, box-shadow 0.4s ease;
+}
+
+.tl-red    { background: var(--red); }
+.tl-yellow { background: var(--yellow); }
+.tl-green  { background: var(--green); }
+
+.tl-light.active { opacity: 1; }
+.tl-red.active    { box-shadow: 0 0 14px var(--red); }
+.tl-yellow.active { box-shadow: 0 0 14px var(--yellow); }
+.tl-green.active  { box-shadow: 0 0 14px var(--green); }
+
+.risk-level-text {
+  font-size: 1.6rem;
+  font-weight: 800;
+  letter-spacing: -.5px;
+  line-height: 1;
+}
+
+.risk-VERDE   .risk-level-text { color: var(--green); }
+.risk-AMARILLO .risk-level-text { color: var(--yellow); }
+.risk-ROJO    .risk-level-text { color: var(--red); }
+
+.risk-prob {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text-dim);
+  margin-top: 0.25rem;
+}
+
+/* Score bar */
+.score-section {
+  padding: 1rem 1.5rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.score-header {
+  display: flex;
+  align-items: baseline;
+  gap: 0.25rem;
+  margin-bottom: 0.5rem;
+}
+
+.score-num {
+  font-size: 2rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  line-height: 1;
+}
+
+.score-max { font-size: 0.85rem; color: var(--text-dim); }
+
+.score-track {
+  height: 6px;
+  background: rgba(255,255,255,0.06);
+  border-radius: 100px;
+  overflow: hidden;
+}
+
+.score-fill {
+  height: 100%;
+  border-radius: 100px;
+  background: linear-gradient(90deg, var(--green), var(--yellow) 50%, var(--red));
+  transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Bloques de resultado */
+.result-block {
+  padding: 0.85rem 1.5rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.result-block-title {
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: .6px;
+  margin-bottom: 0.4rem;
+}
+
+.result-block-content {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+
+.result-recommendation {
+  background: rgba(99,102,241,0.05);
+}
+
+.result-recommendation .result-block-content {
+  color: var(--text-primary);
+  font-weight: 500;
+}
+
+.risk-ROJO .result-recommendation {
+  background: var(--red-dim);
+}
+
+.risk-AMARILLO .result-recommendation {
+  background: var(--yellow-dim);
+}
+
+.risk-VERDE .result-recommendation {
+  background: var(--green-dim);
+}
+
+/* Pill list */
+.pill-list {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-top: 0.25rem;
+}
+
+.pill-list li {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid var(--border);
+  border-radius: 100px;
+  padding: 0.25rem 0.65rem;
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+/* Trazabilidad */
+.trace-details {
+  border-top: 1px solid var(--border);
+}
+
+.trace-summary {
+  padding: 0.75rem 1.5rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text-dim);
+  cursor: pointer;
+  list-style: none;
+  transition: var(--transition);
+}
+
+.trace-summary:hover { color: var(--text-muted); }
+
+.trace-body {
+  padding: 0.75rem 1.5rem 1rem;
+  border-top: 1px solid var(--border);
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+  background: rgba(0,0,0,0.15);
+}
+
+.trace-col-title {
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: .5px;
+  margin-bottom: 0.4rem;
+}
+
+.trace-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.trace-list li {
+  font-size: 0.77rem;
+  color: var(--text-dim);
+  line-height: 1.4;
+  padding-left: 0.75rem;
+  position: relative;
+}
+
+.trace-list li::before {
+  content: '•';
+  position: absolute;
+  left: 0;
+  color: var(--accent);
+}
+
+/* Acciones resultado */
+.result-actions {
+  display: flex;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  border-top: 1px solid var(--border);
+}
+
+.result-disclaimer {
+  padding: 0.75rem 1.5rem 1rem;
+  font-size: 0.7rem;
+  color: var(--text-dim);
+  line-height: 1.6;
+  text-align: center;
+}
+
+/* Error */
+.error-card {
+  background: var(--red-dim);
+  border: 1px solid rgba(239,68,68,0.35);
+  border-radius: var(--radius-lg);
+  padding: 1.25rem 1.5rem;
+  animation: fadeIn 0.3s ease;
+}
+
+.error-title {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--red);
+  margin-bottom: 0.4rem;
+}
+
+.error-msg {
+  font-size: 0.82rem;
+  color: rgba(239,68,68,0.8);
+  line-height: 1.5;
+}
+
+/* ── FOOTER ──────────────────────────────────────────────── */
+.app-footer {
+  text-align: center;
+  padding: 1.5rem;
+  font-size: 0.75rem;
+  color: var(--text-dim);
+  border-top: 1px solid var(--border);
+}
+
+/* ── LOADING STATE ───────────────────────────────────────── */
+.btn-cta.loading {
+  position: relative;
+  pointer-events: none;
+}
+
+.btn-cta.loading::after {
+  content: '';
+  width: 16px; height: 16px;
+  border: 2px solid rgba(255,255,255,0.3);
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+  margin-left: 0.5rem;
+}
+
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* ── UTILS ───────────────────────────────────────────────── */
+[hidden] { display: none !important; }
+
+/* ── MODAL DE DISCLAIMER ─────────────────────────────────────────── */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.85);
+  backdrop-filter: blur(8px);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.25rem;
+  transition: opacity 0.3s ease;
+}
+
+.modal-overlay.modal-hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.modal-card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 2rem;
+  max-width: 520px;
+  width: 100%;
+  box-shadow: 0 24px 64px rgba(0,0,0,0.6);
+  animation: fadeIn 0.3s ease;
+}
+
+.modal-icon {
+  font-size: 2.5rem;
+  text-align: center;
+  margin-bottom: 0.75rem;
+}
+
+.modal-title {
+  font-size: 1.3rem;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 1rem;
+  color: var(--text-primary);
+}
+
+.modal-body {
+  font-size: 0.88rem;
+  color: var(--text-muted);
+  line-height: 1.7;
+  margin-bottom: 1.25rem;
+}
+
+.modal-check-label {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.6rem;
+  font-size: 0.84rem;
+  color: var(--text-muted);
+  cursor: pointer;
+  margin-bottom: 1.25rem;
+  line-height: 1.5;
+}
+
+.modal-check-label input[type="checkbox"] {
+  width: auto;
+  flex-shrink: 0;
+  margin-top: 2px;
+  accent-color: var(--accent);
+}
+
+.modal-accept-btn {
+  width: 100%;
+  justify-content: center;
+  font-size: 0.95rem;
+  padding: 0.75rem;
+}
+
+/* ── PANEL DE CRISIS SALUD MENTAL ────────────────────────────────── */
+.crisis-panel {
+  background: rgba(239, 68, 68, 0.12);
+  border: 2px solid var(--red);
+  border-radius: var(--radius);
+  margin: 0.75rem 1.25rem;
+  animation: fadeIn 0.3s ease;
+  max-width: 1280px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.crisis-inner {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  padding: 1rem 1.25rem;
+}
+
+.crisis-icon {
+  font-size: 1.75rem;
+  flex-shrink: 0;
+  animation: pulse 1.5s infinite;
+}
+
+.crisis-title {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--red);
+  margin-bottom: 0.35rem;
+  text-transform: uppercase;
+  letter-spacing: .4px;
+}
+
+.crisis-msg {
+  font-size: 0.82rem;
+  color: rgba(239,68,68,0.85);
+  margin-bottom: 0.35rem;
+  line-height: 1.5;
+}
+
+.crisis-lines {
+  font-size: 0.82rem;
+  color: var(--red);
+  font-weight: 600;
+}
+
+/* ── NOTA DE SCORE (índice de tamizaje) ──────────────────────────── */
+.score-nota {
+  font-size: 0.68rem;
+  color: var(--text-dim);
+  margin-top: 0.4rem;
+  line-height: 1.5;
+  font-style: italic;
+}
+
+/* ── AVISOS CLÍNICOS ESPECÍFICOS ─────────────────────────────────── */
+.avisos-block {
+  padding: 0.85rem 1.5rem;
+  border-bottom: 1px solid var(--border);
+  background: rgba(245,158,11,0.06);
+}
+
+.avisos-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  margin-top: 0.35rem;
+}
+
+/* ── TOGGLE HINT ─────────────────────────────────────────────────── */
+.toggle-hint {
+  display: block;
+  font-size: 0.7rem;
+  color: var(--text-dim);
+  font-style: italic;
+  margin-top: 0.2rem;
+  line-height: 1.4;
+}
+
+@media (max-width: 480px) {
+  .card   { padding: 1.1rem; }
+  .card-title { font-size: 1.1rem; }
+  .step-label { display: none; }
+  .step-connector { min-width: 12px; }
+}
+
+@media print {
+  .app-header, .disclaimer-bar, .step-nav,
+  .step-actions, .result-actions,
+  .main-panel { display: none !important; }
+  .app-layout { display: block; }
+  .result-panel { position: static; }
+  body { background: #fff; color: #000; }
+  .result-card { border: 1px solid #ccc; }
+  .breakdown-details { display: block !important; border: 1px solid #ddd; }
+  .breakdown-summary { display: none; }
+}
+
+/* BREAKDOWN DETAILS */
+.breakdown-details {
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: rgba(255,255,255,0.02);
+  margin-top: 1rem;
+  overflow: hidden;
+}
+
+.breakdown-summary {
+  padding: 0.75rem 1rem;
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: var(--text-muted);
+  cursor: pointer;
+  user-select: none;
+  transition: var(--transition);
+}
+
+.breakdown-summary:hover {
+  background: var(--bg-hover);
+  color: var(--text-primary);
+}
+
+.breakdown-content {
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  border-top: 1px solid var(--border);
+}
+
+.breakdown-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  padding: 0.25rem 0;
+  border-bottom: 1px dashed rgba(255,255,255,0.05);
+}
+
+.breakdown-pts {
+  font-weight: 700;
+  color: var(--accent);
+}
+
+
+</style>
+</head>
+<body>
+
+  <!-- ══════════════════════════════════════════════════════════ -->
+  <!-- MODAL DE DISCLAIMER — P4: confirmación obligatoria        -->
+  <!-- ══════════════════════════════════════════════════════════ -->
+  <div class="modal-overlay" id="disclaimer-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+    <div class="modal-card">
+      <div class="modal-icon">⚕️</div>
+      <h1 class="modal-title" id="modal-title">Aviso Importante</h1>
+      <p class="modal-body">
+        <strong>Health Priority</strong> es una herramienta de <strong>apoyo al tamizaje clínico</strong>.
+        <br /><br />
+        El resultado es un <strong>índice de tamizaje compuesto</strong>, no un diagnóstico médico ni una probabilidad epidemiológica calibrada. Debe ser interpretado exclusivamente por un <strong>médico del deporte o cardiólogo calificado</strong>.
+        <br /><br />
+        No reemplaza la valoración médica especializada ni exime de la responsabilidad profesional.
+      </p>
+      <label class="modal-check-label">
+        <input type="checkbox" id="disclaimer-check" />
+        <span>He leído y acepto las condiciones de uso de esta herramienta.</span>
+      </label>
+      <button class="btn-cta modal-accept-btn" id="modal-accept-btn" disabled>
+        Acepto — Comenzar evaluación
+      </button>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════════════ -->
+  <!-- PANEL DE CRISIS — P6/autolesión                           -->
+  <!-- ══════════════════════════════════════════════════════════ -->
+  <div class="crisis-panel" id="crisis-panel" hidden role="alert" aria-live="assertive">
+    <div class="crisis-inner">
+      <span class="crisis-icon">🚨</span>
+      <div>
+        <p class="crisis-title">ACCIÓN INMEDIATA REQUERIDA — Salud Mental</p>
+        <p class="crisis-msg">Se detectaron pensamientos de autolesión (PHQ-9 ítem 9 positivo). No dejar al deportista sin acompañamiento.</p>
+        <p class="crisis-lines">
+          Línea de crisis: <strong>106 (Colombia)</strong> · <strong>800-290-0024 (México)</strong> · <strong>717 003 717 (España)</strong>
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════════════ -->
+  <!-- HEADER                                                     -->
+  <!-- ══════════════════════════════════════════════════════════ -->
+  <header class="app-header">
+    <div class="header-inner">
+      <div class="logo">
+        <span class="logo-icon" aria-hidden="true">❤️</span>
+        <div>
+          <span class="logo-title">Health Priority</span>
+          <span class="logo-sub">Riesgo Cardiovascular · Fútbol</span>
+        </div>
+      </div>
+      <div class="header-badge">
+        <span class="pulse-dot"></span>Motor clínico v1.2 activo
+      </div>
+    </div>
+  </header>
+
+  <div class="disclaimer-bar" role="note">
+    ⚕️ Herramienta de tamizaje clínico. El resultado es un índice de apoyo — no emite diagnósticos ni reemplaza la valoración médica especializada.
+  </div>
+
+  <!-- ══════════════════════════════════════════════════════════ -->
+  <!-- LAYOUT PRINCIPAL                                           -->
+  <!-- ══════════════════════════════════════════════════════════ -->
+  <div class="app-layout">
+
+    <!-- ── FORMULARIO MULTI-PASO ─────────────────────────────── -->
+    <main class="main-panel" id="main-panel">
+
+      <nav class="step-nav" aria-label="Pasos del formulario">
+        <button class="step-btn active" data-step="1" id="nav-step-1">
+          <span class="step-num">1</span><span class="step-label">Perfil</span>
+        </button>
+        <span class="step-connector"></span>
+        <button class="step-btn" data-step="2" id="nav-step-2">
+          <span class="step-num">2</span><span class="step-label">Cardiovascular</span>
+        </button>
+        <span class="step-connector"></span>
+        <button class="step-btn" data-step="3" id="nav-step-3">
+          <span class="step-num">3</span><span class="step-label">Respiratorio</span>
+        </button>
+        <span class="step-connector"></span>
+        <button class="step-btn" data-step="4" id="nav-step-4">
+          <span class="step-num">4</span><span class="step-label">Mental</span>
+        </button>
+        <span class="step-connector"></span>
+        <button class="step-btn" data-step="5" id="nav-step-5">
+          <span class="step-num">5</span><span class="step-label">Documentos</span>
+        </button>
+      </nav>
+
+      <form id="assessment-form" novalidate>
+
+        <!-- ── PASO 1: PERFIL ──────────────────────────────────── -->
+        <section class="form-step active" data-step="1" id="step-1">
+          <div class="card">
+            <div class="card-header">
+              <div class="card-icon" style="--icon-color:#6366f1">👤</div>
+              <div>
+                <p class="card-kicker">Paso 1 de 5</p>
+                <h2 class="card-title">Perfil del Deportista</h2>
+              </div>
+            </div>
+
+            <div class="field-grid">
+              <label class="field">
+                <span class="field-label">Nombre completo <em>(opcional)</em></span>
+                <input type="text" id="nombre" name="nombre" placeholder="Ej. Juan Pérez" autocomplete="name" />
+              </label>
+              <label class="field">
+                <span class="field-label">Edad <span class="required">*</span></span>
+                <input type="number" id="edad" name="edad" min="12" max="80" placeholder="Ej. 22" required />
+                <span class="field-hint">12 – 80 años. Si es ≥ 35, se habilitará una sección adicional.</span>
+              </label>
+              <label class="field">
+                <span class="field-label">Sexo biológico <span class="required">*</span></span>
+                <select id="sexo" name="sexo" required>
+                  <option value="">Seleccionar…</option>
+                  <option value="masculino">Masculino</option>
+                  <option value="femenino">Femenino</option>
+                </select>
+                <span class="field-hint">Para QTc: umbral 470 ms (M) / 480 ms (F). Se informa al ingresarlo.</span>
+              </label>
+              <label class="field">
+                <span class="field-label">Nivel deportivo <span class="required">*</span></span>
+                <select id="nivel_deportivo" name="nivel_deportivo" required>
+                  <option value="">Seleccionar…</option>
+                  <option value="iniciacion">Iniciación (sub-14)</option>
+                  <option value="amateur">Amateur (sub-18)</option>
+                  <option value="semiprofesional">Semiprofesional</option>
+                  <option value="profesional">Profesional</option>
+                </select>
+              </label>
+            </div>
+
+
+
+            <div class="step-actions">
+              <span></span>
+              <button type="button" class="btn-primary next-step" data-next="2">Continuar →</button>
+            </div>
+          </div>
+        </section>
+
+        <!-- ── PASO 2: CARDIOVASCULAR ──────────────────────────── -->
+        <section class="form-step" data-step="2" id="step-2">
+          <div class="card">
+            <div class="card-header">
+              <div class="card-icon" style="--icon-color:#ef4444">❤️</div>
+              <div>
+                <p class="card-kicker">Paso 2 de 5</p>
+                <h2 class="card-title">Dominio Cardiovascular</h2>
+              </div>
+            </div>
+
+            <p class="section-info">Marque los hallazgos presentes. Las <span class="badge badge-red">Banderas Rojas</span> activan riesgo ALTO automáticamente y no se acumulan con el score.</p>
+
+            <!-- Síncope — dividido en dos tipos (corrección P3) -->
+            <p class="form-sub-title">🚩 Síncope — especificar tipo</p>
+            <div class="toggle-grid">
+              <label class="toggle red-flag-item">
+                <input type="checkbox" id="sincope_esfuerzo_maximo" name="sincope_esfuerzo_maximo" />
+                <span class="toggle-box"></span>
+                <span class="toggle-text">
+                  Síncope <strong>durante esfuerzo máximo</strong> (sprints, partido, etc.)
+                  <em class="badge badge-red">Bandera Roja</em>
+                  <span class="toggle-hint">Alta sospecha arrítmica — ESC 2020</span>
+                </span>
+              </label>
+              <label class="toggle">
+                <input type="checkbox" id="sincope_post_esfuerzo" name="sincope_post_esfuerzo" />
+                <span class="toggle-box"></span>
+                <span class="toggle-text">
+                  Síncope <strong>post-esfuerzo</strong> o al ponerse de pie (posible vasovagal)
+                  <span class="toggle-hint">Peso ponderado — compatible con vasovagal si se confirma</span>
+                </span>
+              </label>
+            </div>
+
+            <!-- Síntomas -->
+            <p class="form-sub-title">🚩 Síntomas y signos</p>
+            <div class="toggle-grid">
+              <label class="toggle red-flag-item">
+                <input type="checkbox" id="dolor_toracico_ejercicio" name="dolor_toracico_ejercicio" />
+                <span class="toggle-box"></span>
+                <span class="toggle-text">
+                  Dolor torácico relacionado con el ejercicio
+                  <em class="badge badge-red">Bandera Roja</em>
+                </span>
+              </label>
+              <label class="toggle">
+                <input type="checkbox" id="palpitaciones" name="palpitaciones" />
+                <span class="toggle-box"></span>
+                <span class="toggle-text">Palpitaciones durante o después del ejercicio</span>
+              </label>
+              <label class="toggle">
+                <input type="checkbox" id="falla_vi" name="falla_vi" />
+                <span class="toggle-box"></span>
+                <span class="toggle-text">Disfunción ventricular izquierda / BNP elevado</span>
+              </label>
+            </div>
+
+            <!-- Hallazgos ECG específicos -->
+            <p class="form-sub-title">⚡ Hallazgos ECG específicos</p>
+            <div class="toggle-grid">
+              <label class="toggle red-flag-item">
+                <input type="checkbox" id="qt_largo" name="qt_largo" />
+                <span class="toggle-box"></span>
+                <span class="toggle-text">
+                  QT largo confirmado (QTc &gt; 470 ms H / &gt; 480 ms F — ECG confirmatorio obligatorio)
+                  <em class="badge badge-red">Bandera Roja</em>
+                  <span class="toggle-hint">No marcar solo por sospecha clínica; requiere ECG de 12 derivaciones medido por especialista.</span>
+                </span>
+              </label>
+              <label class="toggle red-flag-item">
+                <input type="checkbox" id="brugada_tipo1" name="brugada_tipo1" />
+                <span class="toggle-box"></span>
+                <span class="toggle-text">
+                  Patrón Brugada tipo 1 (espontáneo)
+                  <em class="badge badge-red">Bandera Roja</em>
+                </span>
+              </label>
+              <label class="toggle">
+                <input type="checkbox" id="wpw" name="wpw" />
+                <span class="toggle-box"></span>
+                <span class="toggle-text">
+                  WPW / Pre-excitación ventricular
+                  <span class="toggle-hint">Si coexiste con palpitaciones → regla combinada: elevación de riesgo + aviso de derivación a EEF.</span>
+                </span>
+              </label>
+              <label class="toggle red-flag-item">
+                <input type="checkbox" id="bloqueo_av_completo" name="bloqueo_av_completo" />
+                <span class="toggle-box"></span>
+                <span class="toggle-text">
+                  Bloqueo AV de 3.er grado (Completo) / BAV de alto grado
+                  <em class="badge badge-red">Bandera Roja</em>
+                </span>
+              </label>
+              <label class="toggle">
+                <input type="checkbox" id="bloqueo_av_mobitz2" name="bloqueo_av_mobitz2" />
+                <span class="toggle-box"></span>
+                <span class="toggle-text">Bloqueo AV de 2.° grado (Mobitz II)</span>
+              </label>
+              <label class="toggle red-flag-item">
+                <input type="checkbox" id="tvns_ev_complejas" name="tvns_ev_complejas" />
+                <span class="toggle-box"></span>
+                <span class="toggle-text">
+                  Taquicardia Ventricular No Sostenida (TVNS) o extrasístoles polimorfas/duplas
+                  <em class="badge badge-red">Bandera Roja</em>
+                </span>
+              </label>
+              <label class="toggle">
+                <input type="checkbox" id="extrasistoles_aisladas" name="extrasistoles_aisladas" />
+                <span class="toggle-box"></span>
+                <span class="toggle-text">Extrasístoles aisladas y monomorfas (≥ 2000/24h)</span>
+              </label>
+            </div>
+
+            <!-- Antecedentes -->
+            <p class="form-sub-title">📋 Antecedentes</p>
+            <div class="toggle-grid">
+              <label class="toggle red-flag-item">
+                <input type="checkbox" id="antecedente_familiar_ms" name="antecedente_familiar_ms" />
+                <span class="toggle-box"></span>
+                <span class="toggle-text">
+                  Antecedente familiar de muerte súbita &lt; 50 años (1.er o 2.° grado) o enf. cardíaca hereditaria
+                  <em class="badge badge-red">Bandera Roja</em>
+                </span>
+              </label>
+              <label class="toggle">
+                <input type="checkbox" id="hta_no_controlada" name="hta_no_controlada" />
+                <span class="toggle-box"></span>
+                <span class="toggle-text">HTA no controlada (documentada en historia clínica)</span>
+              </label>
+              <label class="toggle red-flag-item">
+                <input type="checkbox" id="miocarditis_reciente" name="miocarditis_reciente" />
+                <span class="toggle-box"></span>
+                <span class="toggle-text">
+                  Miocarditis activa o reciente (&lt; 6 meses)
+                  <em class="badge badge-red">Bandera Roja</em>
+                </span>
+              </label>
+              <label class="toggle red-flag-item">
+                <input type="checkbox" id="hcm_confirmada" name="hcm_confirmada" />
+                <span class="toggle-box"></span>
+                <span class="toggle-text">
+                  Miocardiopatía hipertrófica (HCM) confirmada
+                  <em class="badge badge-red">Bandera Roja</em>
+                </span>
+              </label>
+              <label class="toggle red-flag-item">
+                <input type="checkbox" id="canal_arritmia" name="canal_arritmia" />
+                <span class="toggle-box"></span>
+                <span class="toggle-text">
+                  Canalopatía diagnosticada (SQTL, SQTC, FV idiopática)
+                  <em class="badge badge-red">Bandera Roja</em>
+                </span>
+              </label>
+            </div>
+
+            <!-- Mediciones objetivas -->
+            <p class="form-sub-title">📊 Mediciones objetivas</p>
+            <div class="toggle-grid">
+              <label class="toggle red-flag-item">
+                <input type="checkbox" id="soplo_cardiaco_patologico" name="soplo_cardiaco_patologico" />
+                <span class="toggle-box"></span>
+                <span class="toggle-text">
+                  Soplo cardíaco patológico (Diastólico, &gt;3/6 o aumenta con Valsalva)
+                  <em class="badge badge-red">Bandera Roja</em>
+                </span>
+              </label>
+            </div>
+            
+            <div class="field-grid" style="margin-top: 1rem;">
+              <label class="field">
+                <span class="field-label">Presión arterial</span>
+                <select id="presion_art" name="presion_art">
+                  <option value="normal">Normal (&lt; 120/80 mmHg)</option>
+                  <option value="elevada">Elevada (120-129 / &lt;80 mmHg)</option>
+                  <option value="hta_grado1">HTA Estadio 1 (130-139 / 80-89 mmHg)</option>
+                  <option value="hta_grado2">HTA Estadio 2 (140-159 / 90-99 mmHg)</option>
+                  <option value="hta_severa">HTA Severa (≥ 160/100 mmHg) 🚩</option>
+                </select>
+              </label>
+              <label class="field">
+                <span class="field-label">Resultado ECG 12 derivaciones</span>
+                <select id="ecg_resultado" name="ecg_resultado">
+                  <option value="normal">Normal — sin hallazgos anormales</option>
+                  <option value="cambios_menores">Cambios menores (seguimiento en 3-6 m)</option>
+                  <option value="anormal">Anormal — criterios internacionales 2017 🚩</option>
+                </select>
+                <span class="field-hint">Para marcar "anormal" se requiere interpretación por especialista con los criterios internacionales 2017.</span>
+              </label>
+            </div>
+
+            <!-- Factores ≥ 35 años -->
+            <div id="seccion_35_plus" hidden>
+              <p class="form-sub-title" style="color:#f59e0b">🧑‍⚕️ Factores ateroscleróticos — Deportista ≥ 35 años (ESC 2020)</p>
+              <p class="section-info" style="border-color:rgba(245,158,11,0.3);background:rgba(245,158,11,0.05)">
+                Aplican solo para deportistas de 35 años o más. Marque los presentes y documentados.
+              </p>
+              <div class="toggle-grid">
+                <label class="toggle">
+                  <input type="checkbox" id="tabaquismo" name="tabaquismo" />
+                  <span class="toggle-box"></span>
+                  <span class="toggle-text">Tabaquismo activo o reciente (≤ 5 años de abstinencia)</span>
+                </label>
+                <label class="toggle">
+                  <input type="checkbox" id="colesterol_alto" name="colesterol_alto" />
+                  <span class="toggle-box"></span>
+                  <span class="toggle-text">Hipercolesterolemia (LDL &gt; 160 mg/dL o en tratamiento)</span>
+                </label>
+                <label class="toggle">
+                  <input type="checkbox" id="diabetes_tipo2" name="diabetes_tipo2" />
+                  <span class="toggle-box"></span>
+                  <span class="toggle-text">Diabetes mellitus tipo 2 o pre-diabetes</span>
+                </label>
+                <label class="toggle">
+                  <input type="checkbox" id="imc_elevado" name="imc_elevado" />
+                  <span class="toggle-box"></span>
+                  <span class="toggle-text">IMC ≥ 30 kg/m² (obesidad documentada)</span>
+                </label>
+              </div>
+            </div>
+
+            <div class="step-actions">
+              <button type="button" class="btn-secondary prev-step" data-prev="1">← Anterior</button>
+              <button type="button" class="btn-primary next-step" data-next="3">Continuar →</button>
+            </div>
+          </div>
+        </section>
+
+        <!-- ── PASO 3: RESPIRATORIO ────────────────────────────── -->
+        <section class="form-step" data-step="3" id="step-3">
+          <div class="card">
+            <div class="card-header">
+              <div class="card-icon" style="--icon-color:#06b6d4">🫁</div>
+              <div>
+                <p class="card-kicker">Paso 3 de 5</p>
+                <h2 class="card-title">Dominio Respiratorio</h2>
+              </div>
+            </div>
+
+            <p class="section-info">Basado en GINA 2025 y consenso SEMED. El asma controlada no contraindica el deporte y no suma puntaje. FEV1 &lt; 40 % activa riesgo alto.</p>
+
+            <div class="field-grid">
+              <label class="field">
+                <span class="field-label">Disnea de esfuerzo</span>
+                <select id="disnea" name="disnea">
+                  <option value="ninguna">Ninguna</option>
+                  <option value="leve">Leve — no limita el rendimiento</option>
+                  <option value="moderada">Moderada — desproporcionada al esfuerzo</option>
+                  <option value="severa">Severa — desproporcionada al esfuerzo</option>
+                </select>
+              </label>
+              <label class="field">
+                <span class="field-label">Asma / EIB (broncoconstricción inducida)</span>
+                <select id="asma" name="asma">
+                  <option value="no">No diagnosticado</option>
+                  <option value="controlada">Controlado — no suma puntaje (GINA 2025)</option>
+                  <option value="no_controlada">No controlado</option>
+                </select>
+              </label>
+              <label class="field">
+                <span class="field-label">FEV1 (espirometría)</span>
+                <select id="fev1" name="fev1">
+                  <option value="normal">Normal (≥ 80 %)</option>
+                  <option value="leve_reduccion">Reducción leve (60-79 %)</option>
+                  <option value="moderada_reduccion">Reducción moderada (40-59 %)</option>
+                  <option value="severa_reduccion">Reducción severa (&lt; 40 %) 🚩</option>
+                </select>
+              </label>
+            </div>
+
+            <div class="toggle-grid">
+              <label class="toggle">
+                <input type="checkbox" id="sibilancias" name="sibilancias" />
+                <span class="toggle-box"></span>
+                <span class="toggle-text">Sibilancias audibles o documentadas</span>
+              </label>
+              <label class="toggle">
+                <input type="checkbox" id="caida_rendimiento" name="caida_rendimiento" />
+                <span class="toggle-box"></span>
+                <span class="toggle-text">Caída del rendimiento sin causa aparente (peso reducido; acumulable con otros síntomas)</span>
+              </label>
+            </div>
+
+            <div class="step-actions">
+              <button type="button" class="btn-secondary prev-step" data-prev="2">← Anterior</button>
+              <button type="button" class="btn-primary next-step" data-next="4">Continuar →</button>
+            </div>
+          </div>
+        </section>
+
+        <!-- ── PASO 4: MENTAL ──────────────────────────────────── -->
+        <section class="form-step" data-step="4" id="step-4">
+          <div class="card">
+            <div class="card-header">
+              <div class="card-icon" style="--icon-color:#8b5cf6">🧠</div>
+              <div>
+                <p class="card-kicker">Paso 4 de 5</p>
+                <h2 class="card-title">Salud Mental del Deportista</h2>
+              </div>
+            </div>
+
+            <p class="section-info">Basado en SMHAT-1 y APSQ (IOC/BJSM 2020). La detección de pensamientos de autolesión activa un protocolo de crisis con derivación urgente.</p>
+
+            <div class="field-grid">
+              <label class="field">
+                <span class="field-label">Ansiedad (escala clínica SMHAT-1)</span>
+                <select id="ansiedad" name="ansiedad">
+                  <option value="ninguna">Ninguna</option>
+                  <option value="leve">Leve</option>
+                  <option value="moderada">Moderada</option>
+                  <option value="severa">Severa</option>
+                </select>
+              </label>
+              <label class="field">
+                <span class="field-label">Calidad del sueño</span>
+                <select id="sueno" name="sueno">
+                  <option value="normal">Normal</option>
+                  <option value="alterado">Alterado / Insomnio</option>
+                </select>
+              </label>
+            </div>
+
+            <div class="toggle-grid">
+              <label class="toggle">
+                <input type="checkbox" id="burnout" name="burnout" />
+                <span class="toggle-box"></span>
+                <span class="toggle-text">Burnout deportivo (agotamiento emocional / físico persistente)</span>
+              </label>
+              <label class="toggle">
+                <input type="checkbox" id="apsq_alto" name="apsq_alto" />
+                <span class="toggle-box"></span>
+                <span class="toggle-text">Puntuación APSQ ≥ 17 (tamizaje positivo de salud mental)</span>
+              </label>
+              <label class="toggle red-flag-item">
+                <input type="checkbox" id="autolesion" name="autolesion" />
+                <span class="toggle-box"></span>
+                <span class="toggle-text">
+                  Pensamientos de autolesión (PHQ-9 ítem 9 positivo)
+                  <em class="badge badge-red">Bandera Roja — Protocolo de Crisis</em>
+                  <span class="toggle-hint">La activación de este campo despliega las instrucciones de acción inmediata.</span>
+                </span>
+              </label>
+            </div>
+
+            <div class="step-actions">
+              <button type="button" class="btn-secondary prev-step" data-prev="3">← Anterior</button>
+              <button type="button" class="btn-primary next-step" data-next="5">Continuar →</button>
+            </div>
+          </div>
+        </section>
+
+        <!-- ── PASO 5: DOCUMENTOS ──────────────────────────────── -->
+        <section class="form-step" data-step="5" id="step-5">
+          <div class="card">
+            <div class="card-header">
+              <div class="card-icon" style="--icon-color:#f59e0b">📎</div>
+              <div>
+                <p class="card-kicker">Paso 5 de 5</p>
+                <h2 class="card-title">Documentos Clínicos</h2>
+              </div>
+            </div>
+
+            <p class="section-info">Adjunte ECG, ecocardiograma, espirometría u otros estudios (PDF, JPG, PNG — máx. 10 MB c/u, hasta 5 archivos). Los archivos se almacenan temporalmente.</p>
+
+            <div class="upload-zone" id="upload-zone" role="button" tabindex="0">
+              <span class="upload-icon" aria-hidden="true">📤</span>
+              <p class="upload-text">Arrastra archivos aquí o <span class="upload-link">haz clic para seleccionar</span></p>
+              <p class="upload-hint">PDF · JPG · PNG · WebP — máx. 10 MB por archivo</p>
+              <input type="file" id="archivos" name="archivos" multiple
+                accept=".pdf,.jpg,.jpeg,.png,.webp" class="upload-input" />
+            </div>
+
+            <div id="file-list" class="file-list" hidden></div>
+            <div id="upload-status" class="upload-status" hidden></div>
+
+            <div class="step-actions">
+              <button type="button" class="btn-secondary prev-step" data-prev="4">← Anterior</button>
+              <button type="submit" class="btn-cta" id="submit-button">
+                <span class="btn-cta-icon">⚡</span>
+                Calcular Riesgo
+              </button>
+            </div>
+          </div>
+        </section>
+
+      </form>
+    </main>
+
+    <!-- ── PANEL DE RESULTADO ─────────────────────────────────── -->
+    <aside class="result-panel" id="result-panel" aria-live="polite">
+
+      <div class="result-empty" id="result-empty">
+        <div class="empty-icon">📋</div>
+        <p class="empty-title">Sin evaluación aún</p>
+        <p class="empty-sub">Completa los 5 pasos y presiona "Calcular Riesgo" para ver el resultado.</p>
+      </div>
+
+      <div class="result-card" id="result-card" hidden>
+        <!-- Resumen del Participante -->
+        <div class="participant-summary" id="participant-summary" style="margin: -1rem -1rem 1.5rem -1rem; padding: 1rem; background: rgba(255,255,255,0.03); border-bottom: 1px solid var(--border);">
+          <div style="font-size: 0.7rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 0.25rem;">Deportista evaluado:</div>
+          <div id="resumen-nombre" style="font-size: 1.1rem; font-weight: 700; color: var(--text-primary); line-height: 1.2;">—</div>
+          <div id="resumen-detalles" style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.25rem;">—</div>
+        </div>
+
+
+        <!-- Semáforo -->
+        <div class="traffic-light-container">
+          <div class="traffic-light" id="traffic-light" aria-label="Semáforo de riesgo">
+            <div class="tl-light tl-red"    data-light="ROJO"     aria-label="Rojo"></div>
+            <div class="tl-light tl-yellow" data-light="AMARILLO" aria-label="Amarillo"></div>
+            <div class="tl-light tl-green"  data-light="VERDE"    aria-label="Verde"></div>
+          </div>
+          <div class="risk-label">
+            <p class="risk-level-text" id="risk-level-text">—</p>
+            <p class="risk-prob" id="risk-prob">—</p>
+          </div>
+        </div>
+
+        <!-- Score con nota de índice -->
+        <div class="score-section">
+          <div class="score-header">
+            <span class="score-num" id="score-num">0</span>
+            <span class="score-max">/ 100</span>
+          </div>
+          <div class="score-track">
+            <div class="score-fill" id="score-fill" style="width:0%"></div>
+          </div>
+          <p class="score-nota" id="score-nota"></p>
+        </div>
+
+        <!-- Avisos clínicos (WPW+palp, ≥35, etc.) -->
+        <div class="avisos-block" id="avisos-block" hidden>
+          <p class="result-block-title">⚠️ Avisos clínicos específicos</p>
+          <ul class="avisos-list" id="avisos-list"></ul>
+        </div>
+
+        <!-- Explicación -->
+        <div class="result-block">
+          <p class="result-block-title">📝 Explicación clínica</p>
+          <p class="result-block-content" id="explicacion">—</p>
+        </div>
+
+        <!-- Recomendación -->
+        <div class="result-block result-recommendation" id="recommendation-block">
+          <p class="result-block-title">⚡ Recomendación</p>
+          <p class="result-block-content" id="recomendacion">—</p>
+        </div>
+
+        <!-- Estudios sugeridos -->
+        <div class="result-block">
+          <p class="result-block-title">🔬 Estudios sugeridos</p>
+          <ul class="pill-list" id="estudios-list"></ul>
+        </div>
+
+        <details class="breakdown-details" id="breakdown-details">
+
+          <summary class="breakdown-summary">Ver desglose del puntaje</summary>
+          <div class="breakdown-content" id="breakdown-list-original"></div>
+        </details>
+
+
+        <!-- Trazabilidad -->
+        <details class="trace-details">
+          <summary class="trace-summary">🔍 Ver trazabilidad de decisiones</summary>
+          <div class="trace-body">
+            <div class="trace-col">
+              <p class="trace-col-title">Reglas aplicadas</p>
+              <ul class="trace-list" id="reglas-list"></ul>
+            </div>
+            <div class="trace-col">
+              <p class="trace-col-title">Índice por dominio</p>
+              <ul class="trace-list" id="dominios-list"></ul>
+            </div>
+            <div class="trace-col">
+              <p class="trace-col-title">Factores detectados</p>
+              <ul class="trace-list" id="factores-list"></ul>
+            </div>
+          </div>
+        </details>
+
+        <div class="result-actions">
+          <button type="button" class="btn-secondary btn-small" id="reset-btn">🔄 Nueva evaluación</button>
+          <button type="button" class="btn-secondary btn-small" id="print-btn">🖨️ Imprimir</button>
+        </div>
+
+        <p class="result-disclaimer">
+          Calculado: <span id="result-timestamp">—</span>.<br />
+          ESC 2020 · AHA/ACC 2025 (PA) · GINA 2025 · Criterios ECG 2017 · SMHAT-1.
+        </p>
+      </div>
+
+      <div class="error-card" id="error-card" hidden role="alert">
+        <p class="error-title">⚠️ Error al calcular</p>
+        <p class="error-msg" id="error-msg"></p>
+      </div>
+
+    </aside>
+  </div>
+
+  <footer class="app-footer">
+    <p>Health Priority v1.2 · Motor de reglas transparente, sin lógica opaca · <em>No emite diagnósticos</em></p>
+  </footer>
+
+  
+<script>
+"use strict";
+// --- constants.js ---
+// src/clinical/constants.js — Constantes clínicas Health Priority v1.1
+// Base documental: ESC 2020, ACC 2015, GINA 2025, Int. ECG Criteria 2017, SMHAT-1, ACC/AHA 2017 (PA)
+// CORRECCIONES AUDITORÍA v1.1:
+//   - Se eliminó el doble conteo de variables que ya son banderas rojas absolutas (P1)
+//   - Se dividió sincope_ejercicio en sincope_esfuerzo_maximo (BR) y sincope_post_esfuerzo (ponderado) (P3)
+//   - Asma controlada ahora suma 0 pts (P5 / GINA 2025)
+//   - Probabilidades cambiadas a "índice" para evitar interpretación epidemiológica errónea (P2/M6)
+//   - Agregados factores ateroscleróticos para ≥ 35 años (C6)
+//   - Bonus por WPW + palpitaciones combinados (C2)
+
+
+// ── GRUPOS ETARIOS ───────────────────────────────────────────────────────────
+// Alineado con clasificación FIFA/UEFA:
+//   JUVENIL      : 12–18 años (iniciación → sub-18)
+//   ADULTO_JV    : 19–24 años (sub-20 / semiprofesional)
+//   PROFESIONAL  : ≥ 25 años  (alto rendimiento adulto)
+const AGE_GROUPS = {
+  JUVENIL:     "juvenil",
+  ADULTO_JV:   "adulto_joven",
+  PROFESIONAL: "profesional",
+};
+
+// ── ENUMERACIONES ────────────────────────────────────────────────────────────
+const ENUMS = {
+  sexo:             ["masculino", "femenino"],
+  nivel_deportivo:  ["iniciacion", "amateur", "semiprofesional", "profesional"],
+  disnea:           ["ninguna", "leve", "moderada", "severa"],
+  asma:             ["no", "controlada", "no_controlada"],
+  ansiedad:         ["ninguna", "leve", "moderada", "severa"],
+  sueno:            ["normal", "alterado"],
+  presion_art:      ["normal", "elevada", "hta_grado1", "hta_grado2", "hta_severa"],
+  ecg_resultado:    ["normal", "cambios_menores", "anormal"],
+  fev1_estado:      ["normal", "leve_reduccion", "moderada_reduccion", "severa_reduccion"],
+};
+
+// ── BANDERAS ROJAS ────────────────────────────────────────────────────────────
+// Cualquier bandera roja eleva el resultado a ROJO sin importar el score.
+// IMPORTANTE:  estas variables NO se puntúan adicionalmente en CARDIO_WEIGHTS
+//              para evitar doble conteo (corrección auditoría P1).
+const RED_FLAG_FIELDS = [
+  "sincope_esfuerzo_maximo",   // Síncope DURANTE esfuerzo máximo → alta sospecha arrítmica (ESC 2020)
+  "dolor_toracico_ejercicio",  // Dolor torácico relacionado con el ejercicio
+  "antecedente_familiar_ms",   // Muerte súbita familiar < 50 años (1.er o 2.° grado) o hereditaria
+  "miocarditis_reciente",      // Miocarditis activa o < 6 meses
+  "qt_largo",                  // SQTL confirmado (QTc > 470 ms H / > 480 ms M)
+  "brugada_tipo1",             // Patrón ECG Brugada tipo 1 espontáneo
+  "hcm_confirmada",            // Miocardiopatía hipertrófica confirmada
+  "canal_arritmia",            // Canalopatía diagnosticada (SQTL, SQTC, FV idiopática)
+  "autolesion",                // PHQ-9 ítem 9 positivo — acción clínica inmediata
+  "bloqueo_av_completo",       // Bloqueo AV de 3.er grado (C2)
+  "tvns_ev_complejas",         // TVNS o extrasístoles polimorfas/duplas (C1)
+  "soplo_cardiaco_patologico", // Soplo diastólico, >3/6 o aumenta con Valsalva (R1)
+];
+
+// ── PONDERACIONES CARDIOVASCULARES POR GRUPO ETARIO ──────────────────────────
+// SOLO contiene variables que NO son banderas rojas absolutas.
+const CARDIO_WEIGHTS = {
+  [AGE_GROUPS.JUVENIL]: {
+    sincope_post_esfuerzo:    10, // Síncope post-esfuerzo / ortostático (compatible con vasovagal) (P3)
+    palpitaciones:            15,
+    hta_no_controlada:        12,
+    wpw:                      20,
+    bloqueo_av_mobitz2:       20, // Antes bloqueo_av_avanzado
+    extrasistoles_aisladas:   10, // Antes extrasistoles_frecuentes
+    falla_vi:                 25,
+  },
+  [AGE_GROUPS.ADULTO_JV]: {
+    sincope_post_esfuerzo:    10,
+    palpitaciones:            15,
+    hta_no_controlada:        15,
+    wpw:                      18,
+    bloqueo_av_mobitz2:       18,
+    extrasistoles_aisladas:   10,
+    falla_vi:                 22,
+  },
+  [AGE_GROUPS.PROFESIONAL]: {
+    sincope_post_esfuerzo:    10,
+    palpitaciones:            12,
+    hta_no_controlada:        20,  // Mayor prevalencia HTA en adultos
+    wpw:                      15,
+    bloqueo_av_mobitz2:       18,
+    extrasistoles_aisladas:   10,
+    falla_vi:                 20,
+  },
+};
+
+// ── FACTORES ATEROSCLERÓTICOS ≥ 35 AÑOS (ESC 2020 §35+) ─────────────────────
+// Aplicados solo cuando edad ≥ 35, en adición a los pesos del grupo PROFESIONAL.
+// Corrección auditoría C6.
+const CARDIO_WEIGHTS_35_PLUS = {
+  tabaquismo:      15,
+  colesterol_alto: 12,
+  diabetes_tipo2:  12,
+  imc_elevado:     8,   // IMC ≥ 30 kg/m²
+};
+
+// ── BONUS WPW + PALPITACIONES (C2) ──────────────────────────────────────────
+// ESC 2020: WPW con síntomas (palpitaciones) → derivar a electrofisiología urgente.
+// Si ambas variables están presentes, se agrega un bonus por regla combinada.
+const WPW_PALPITACIONES_BONUS = 15;
+
+// ── PESOS PRESIÓN ARTERIAL (ACC/AHA 2025) ────────────────────────────────────
+const PA_WEIGHTS = {
+  normal:      0,
+  elevada:     5,   // 120-129 / <80 mmHg
+  hta_grado1:  15,  // 130-139 / 80-89 mmHg
+  hta_grado2:  20,  // 140-159 / 90-99 mmHg
+  hta_severa:  25,  // ≥ 160 / ≥ 100 mmHg → también bandera roja en engine
+};
+
+// ── PESOS ECG (Int. ECG Criteria for Athletes 2017) ─────────────────────────
+const ECG_WEIGHTS = {
+  normal:          0,
+  cambios_menores: 5,
+  anormal:         20, // ECG anormal también activa bandera roja en engine
+};
+
+// ── PESOS RESPIRATORIOS (GINA 2025 / SEMED) ─────────────────────────────────
+const RESPIRATORY_WEIGHTS = {
+  disnea: { ninguna: 0, leve: 5, moderada: 10, severa: 18 },
+  sibilancias:      8,
+  asma: {
+    no:           0,
+    controlada:   0,   // Asma controlada no contraindica deporte (GINA 2025) — corr. P5 / M2
+    no_controlada: 15,
+  },
+  caida_rendimiento: 5,  // Reducido de 8 a 5 por inespecificidad (corrección M1)
+  fev1: {
+    normal:             0,
+    leve_reduccion:     5,   // FEV1 60-79 %
+    moderada_reduccion: 12,  // FEV1 40-59 %
+    severa_reduccion:   20,  // FEV1 < 40 % → también bandera roja
+  },
+};
+
+// ── PESOS MENTALES (SMHAT-1 / APSQ) ─────────────────────────────────────────
+const MENTAL_WEIGHTS = {
+  ansiedad: { ninguna: 0, leve: 3, moderada: 7, severa: 12 },
+  sueno:  { normal: 0, alterado: 5 },
+  burnout:    6,
+  apsq_alto:  8,   // APSQ ≥ 17
+  autolesion: 40,  // PHQ-9 ítem 9 positivo → bandera roja + acción inmediata
+};
+
+// ── ETIQUETAS LEGIBLES ────────────────────────────────────────────────────────
+const FIELD_LABELS = {
+  // Cardiovascular — síncope (dividido, corrección P3)
+  sincope_esfuerzo_maximo:  "Síncope durante esfuerzo máximo",
+  sincope_post_esfuerzo:    "Síncope post-esfuerzo / ortostático (posible vasovagal)",
+  // Cardiovascular — síntomas y antecedentes
+  dolor_toracico_ejercicio: "Dolor torácico relacionado con el ejercicio",
+  palpitaciones:            "Palpitaciones en el ejercicio",
+  antecedente_familiar_ms:  "Antecedente familiar de muerte súbita < 50 años (1.er o 2.° grado) o enfermedad cardíaca hereditaria",
+  hta_no_controlada:        "Hipertensión arterial no controlada (documentada)",
+  ecg_anormal:              "ECG anormal",
+  miocarditis_reciente:     "Miocarditis activa o reciente (< 6 meses)",
+  wpw:                      "WPW / Pre-excitación ventricular",
+  bloqueo_av_mobitz2:       "Bloqueo AV de 2.° grado (Mobitz II)",
+  bloqueo_av_completo:      "Bloqueo AV de 3.er grado (Completo) / BAV de alto grado",
+  extrasistoles_aisladas:   "Extrasístoles aisladas y monomorfas (≥ 2000/24h)",
+  tvns_ev_complejas:        "Taquicardia Ventricular No Sostenida (TVNS) o extrasístoles polimorfas/duplas",
+  soplo_cardiaco_patologico:"Soplo cardíaco patológico (Diastólico, >3/6 o aumenta con Valsalva)",
+  qt_largo:                 "Síndrome de QT largo (QTc > 470 ms H / > 480 ms M)",
+  brugada_tipo1:            "Patrón Brugada tipo 1 (espontáneo)",
+  hcm_confirmada:           "Miocardiopatía hipertrófica (HCM) confirmada",
+  canal_arritmia:           "Canalopatía diagnosticada (SQTL, SQTC, FV idiopática)",
+  falla_vi:                 "Disfunción ventricular izquierda / BNP elevado",
+  // Cardiovascular ≥ 35 años
+  tabaquismo:               "Tabaquismo activo o reciente (≤ 5 años)",
+  colesterol_alto:          "Hipercolesterolemia (LDL > 160 mg/dL o en tratamiento)",
+  diabetes_tipo2:           "Diabetes mellitus tipo 2 o pre-diabetes",
+  imc_elevado:              "IMC ≥ 30 kg/m² (obesidad)",
+  // Respiratorio
+  disnea_leve:              "Disnea leve",
+  disnea_moderada:          "Disnea moderada (desproporcionada al esfuerzo)",
+  disnea_severa:            "Disnea severa (desproporcionada al esfuerzo)",
+  asma_controlada:          "Asma controlada (no suma puntaje — GINA 2025)",
+  asma_no_controlada:       "Asma no controlada",
+  sibilancias:              "Sibilancias",
+  caida_rendimiento:        "Caída del rendimiento deportivo",
+  fev1_leve_reduccion:      "FEV1 60-79 % (reducción leve)",
+  fev1_moderada_reduccion:  "FEV1 40-59 % (reducción moderada)",
+  fev1_severa_reduccion:    "FEV1 < 40 % (reducción severa)",
+  // Mental
+  ansiedad_leve:            "Ansiedad leve",
+  ansiedad_moderada:        "Ansiedad moderada",
+  ansiedad_severa:          "Ansiedad severa",
+  sueno_alterado:           "Sueño alterado",
+  burnout:                  "Burnout deportivo",
+  apsq_alto:                "Puntuación APSQ ≥ 17 (tamizaje positivo)",
+  autolesion:               "Pensamientos de autolesión (PHQ-9 ítem 9 positivo)",
+  // PA / ECG (etiquetas dinámicas)
+  presion_elevada:          "Presión arterial elevada (120-129 / <80 mmHg)",
+  presion_hta_grado1:       "Hipertensión Estadio 1 (130-139 / 80-89 mmHg)",
+  presion_hta_grado2:       "Hipertensión Estadio 2 (140-159 / 90-99 mmHg)",
+  presion_hta_severa:       "HTA Severa / Crisis (≥ 160/100 mmHg)",
+  ecg_cambios_menores:      "Cambios ECG menores (requieren seguimiento)",
+  ecg_anormal_dx:           "Hallazgos ECG anormales (Criterios Internacionales 2017)",
+  // Reglas combinadas
+  wpw_palpitaciones_combo:  "WPW + Palpitaciones (regla combinada: riesgo sincopal / FA → derivar a EEF)",
+};
+
+// ── DOMINIOS ──────────────────────────────────────────────────────────────────
+const DOMAIN_LABELS = {
+  cardiovascular: "Cardiovascular",
+  respiratorio:   "Respiratorio",
+  mental:         "Mental",
+};
+
+// ── ESTUDIOS SUGERIDOS ────────────────────────────────────────────────────────
+const DOMAIN_STUDIES = {
+  cardiovascular: [
+    "ECG de 12 derivaciones",
+    "Ecocardiograma 2D / Doppler",
+    "Prueba de esfuerzo (ergometría)",
+    "Monitoreo Holter 24 h",
+  ],
+  cardiovascular_alto: [
+    "ECG de 12 derivaciones",
+    "Ecocardiograma 2D / Doppler",
+    "Resonancia magnética cardíaca (RMC)",
+    "Prueba de esfuerzo con protocolo máximo",
+    "Monitoreo Holter 24 h",
+    "Pruebas genéticas (canalopatías / miocardiopatías)",
+  ],
+  wpw_sintomatico: [
+    "Estudio electrofisiológico (EEF) invasivo",
+    "Ergometría (búsqueda de bloqueo de la vía accesoria)",
+    "Holter 24 h",
+  ],
+  cardiovascular_35_plus: [
+    "Perfil lipídico completo",
+    "Glicemia en ayunas / HbA1c",
+    "Score de calcio coronario (CAC)",
+    "Evaluación de riesgo cardiovascular global (Framingham / SCORE2)",
+  ],
+  respiratorio: [
+    "Espirometría (pre / post-broncodilatador)",
+    "Prueba de provocación bronquial",
+    "Medición de FENO",
+    "Peak Flow Meter",
+  ],
+  mental: [
+    "Evaluación psicológica / psiquiátrica",
+    "Aplicación SMHAT-1 (Formulario 1)",
+  ],
+  mental_urgente: [
+    "Evaluación clínica urgente por profesional de salud mental",
+    "No dejar al deportista sin acompañamiento",
+    "Línea de crisis: 106 (Colombia) / 800-290-0024 (México)",
+  ],
+};
+
+// ── METADATOS DE RIESGO ──────────────────────────────────────────────────────
+// ── CONFIGURACIÓN DEL ÍNDICE DE RIESGO (NUEVO v1.2.2) ──────────────────────────
+const SCORE_THRESHOLDS = {
+    VERDE:    24,
+    AMARILLO: 59,
+    ROJO:     60
+};
+
+const RED_FLAG_SCORE = {
+    FIRST: 60,   // Cualquier bandera roja garantiza el semáforo rojo (>= 60)
+    EXTRA: 20    // Cada bandera roja adicional aumenta el índice de peligro
+};
+
+const RISK_META = {
+  VERDE: {
+    probabilidad:  "Índice bajo",
+    descripcion:   "Riesgo clínico bajo (0-24 pts)",
+    recomendacion: "Actividad deportiva normal autorizada. Seguimiento anual de rutina. " +
+                   "Si existen factores positivos menores, reevaluar en 6 meses.",
+    color: "#22c55e",
+  },
+
+  AMARILLO: {
+    probabilidad:  "Índice intermedio",
+    descripcion:   "Riesgo clínico intermedio (25-59 pts)",
+    recomendacion: "Reducir intensidad de entrenamiento. Completar estudios sugeridos antes " +
+                   "de reanudar competencia. Reevaluación médica en ≤ 4 semanas.",
+    color: "#f59e0b",
+  },
+  ROJO: {
+    probabilidad:  "Índice alto",
+    descripcion:   "Riesgo clínico alto (60+ pts)",
+
+    recomendacion: "Suspender actividad deportiva de competencia de inmediato. Derivar a " +
+                   "cardiología / medicina del deporte especializada. No retorno al juego " +
+                   "sin evaluación y aval especializado documentado.",
+    color: "#ef4444",
+  },
+};
+
+// ── NOTA EXPLICATIVA DEL SCORE ────────────────────────────────────────────────
+// Texto mostrado en la UI junto al score (corrección M6)
+const SCORE_DISCLAIMER =
+  "Índice de tamizaje compuesto (0–100). No es una probabilidad epidemiológica calibrada. " +
+  "Debe interpretarse por un médico del deporte calificado.";
+
+// ── REFERENCIAS DOCUMENTALES ─────────────────────────────────────────────────
+const SCIENTIFIC_REFERENCES = [
+  "Protocolo clínico interno de estratificación del riesgo cardiovascular en el deporte (Health Priority v1.1, 2025).",
+  "Guía ESC 2020 sobre cardiología del deporte y el ejercicio en pacientes con enfermedad cardiovascular.",
+  "Eligibility and Disqualification Recommendations for Competitive Athletes with Cardiovascular Abnormalities — ACC/AHA 2015.",
+  "International Recommendations for Electrocardiographic Interpretation in Athletes — Br J Sports Med 2017.",
+  "Global Strategy for Asthma Management and Prevention — GINA 2025 Update.",
+  "Broncoconstricción inducida por el esfuerzo — Documento de consenso SEMED.",
+  "SMHAT-1 Athlete Mental Health Screening Tool — IOC/BJSM 2020.",
+  "Athletes and Psychological Screening Questionnaire (APSQ).",
+  "AHA/ACC 2025 High Blood Pressure Guidelines (Diagnóstico y manejo intensivo).",
+];
+
+
+
+
+// --- validation.js ---
+// src/clinical/validation.js — Validación de entrada Health Priority v1.1
+// CORRECCIONES AUDITORÍA v1.1:
+//   - P3: sincope_ejercicio reemplazado por sincope_esfuerzo_maximo + sincope_post_esfuerzo
+//   - C6: agregados campos ateroscleróticos para ≥ 35 años (tabaquismo, colesterol_alto, diabetes_tipo2, imc_elevado)
+
+
+
+
+function isPlainObject(v) {
+  return typeof v === "object" && v !== null && !Array.isArray(v);
+}
+
+function normalizeString(v) {
+  return typeof v === "string" ? v.trim().toLowerCase() : v;
+}
+
+function validateEnum(errors, path, value, allowed) {
+  if (!allowed.includes(value)) {
+    errors.push(`${path} debe ser uno de: ${allowed.join(", ")}.`);
+  }
+}
+
+function validateBoolean(errors, path, value) {
+  if (typeof value !== "boolean") {
+    errors.push(`${path} debe ser booleano (true/false). Recibido: ${typeof value}.`);
+  }
+}
+
+function validateAssessmentInput(input) {
+  const errors = [];
+
+  if (!isPlainObject(input)) {
+    return { isValid: false, errors: ["El cuerpo de la solicitud debe ser un objeto JSON válido."] };
+  }
+
+  const edad          = Number(input.edad);
+  const sexo          = normalizeString(input.sexo);
+  const nivel_dep     = normalizeString(input.nivel_deportivo);
+  const cardiovascular = input.cardiovascular;
+  const respiratorio   = input.respiratorio;
+  const mental         = input.mental;
+
+  // ── DATOS GENERALES ──────────────────────────────────────────────────────
+  if (!Number.isFinite(edad) || edad < 12 || edad > 80) {
+    errors.push("edad debe estar entre 12 y 80 años.");
+  }
+
+  validateEnum(errors, "sexo", sexo, ENUMS.sexo);
+
+  if (nivel_dep) {
+    validateEnum(errors, "nivel_deportivo", nivel_dep, ENUMS.nivel_deportivo);
+  }
+
+  if (!isPlainObject(cardiovascular)) errors.push("cardiovascular debe ser un objeto.");
+  if (!isPlainObject(respiratorio))   errors.push("respiratorio debe ser un objeto.");
+  if (!isPlainObject(mental))         errors.push("mental debe ser un objeto.");
+
+  if (errors.length > 0) return { isValid: false, errors };
+
+  // ── CARDIOVASCULAR — BOOLEANOS ───────────────────────────────────────────
+  // NOTA P3: sincope_ejercicio antiguo reemplazado por dos campos específicos
+  const boolCardio = [
+    "sincope_esfuerzo_maximo",   // NUEVO: síncope durante esfuerzo máximo (bandera roja)
+    "sincope_post_esfuerzo",     // NUEVO: síncope post-esfuerzo / ortostático (ponderado)
+    "dolor_toracico_ejercicio",
+    "palpitaciones",
+    "antecedente_familiar_ms",
+    "hta_no_controlada",
+    "miocarditis_reciente",
+    "wpw",
+    "bloqueo_av_mobitz2",
+    "bloqueo_av_completo",
+    "extrasistoles_aisladas",
+    "tvns_ev_complejas",
+    "soplo_cardiaco_patologico",
+    "qt_largo",
+    "brugada_tipo1",
+    "hcm_confirmada",
+    "canal_arritmia",
+    "falla_vi",
+    // Factores ateroscleróticos ≥ 35 (C6): opcionales, se ignoran si no se envían
+    "tabaquismo",
+    "colesterol_alto",
+    "diabetes_tipo2",
+    "imc_elevado",
+  ];
+
+  boolCardio.forEach((k) => {
+    if (cardiovascular[k] !== undefined) {
+      validateBoolean(errors, `cardiovascular.${k}`, cardiovascular[k]);
+    }
+  });
+
+  const presion = normalizeString(cardiovascular.presion_art || "normal");
+  validateEnum(errors, "cardiovascular.presion_art", presion, ENUMS.presion_art);
+
+  const ecg = normalizeString(cardiovascular.ecg_resultado || "normal");
+  validateEnum(errors, "cardiovascular.ecg_resultado", ecg, ENUMS.ecg_resultado);
+
+  // ── RESPIRATORIO ─────────────────────────────────────────────────────────
+  const disnea = normalizeString(respiratorio.disnea || "ninguna");
+  validateEnum(errors, "respiratorio.disnea", disnea, ENUMS.disnea);
+
+  const asma = normalizeString(respiratorio.asma || "no");
+  validateEnum(errors, "respiratorio.asma", asma, ENUMS.asma);
+
+  if (respiratorio.sibilancias      !== undefined) validateBoolean(errors, "respiratorio.sibilancias",      respiratorio.sibilancias);
+  if (respiratorio.caida_rendimiento !== undefined) validateBoolean(errors, "respiratorio.caida_rendimiento", respiratorio.caida_rendimiento);
+
+  const fev1 = normalizeString(respiratorio.fev1 || "normal");
+  validateEnum(errors, "respiratorio.fev1", fev1, ENUMS.fev1_estado);
+
+  // ── MENTAL ───────────────────────────────────────────────────────────────
+  const ansiedad = normalizeString(mental.ansiedad || "ninguna");
+  validateEnum(errors, "mental.ansiedad", ansiedad, ENUMS.ansiedad);
+
+  const sueno = normalizeString(mental.sueno || "normal");
+  validateEnum(errors, "mental.sueno", sueno, ENUMS.sueno);
+
+  if (mental.burnout    !== undefined) validateBoolean(errors, "mental.burnout",    mental.burnout);
+  if (mental.apsq_alto  !== undefined) validateBoolean(errors, "mental.apsq_alto",  mental.apsq_alto);
+  if (mental.autolesion !== undefined) validateBoolean(errors, "mental.autolesion", mental.autolesion);
+
+  if (errors.length > 0) return { isValid: false, errors };
+
+  // ── DATOS NORMALIZADOS ───────────────────────────────────────────────────
+  const normalized = {
+    edad,
+    sexo,
+    nivel_deportivo: nivel_dep || "profesional",
+    cardiovascular: {
+      // Síncope dividido (P3)
+      sincope_esfuerzo_maximo:  !!cardiovascular.sincope_esfuerzo_maximo,
+      sincope_post_esfuerzo:    !!cardiovascular.sincope_post_esfuerzo,
+      // Resto de variables
+      dolor_toracico_ejercicio: !!cardiovascular.dolor_toracico_ejercicio,
+      palpitaciones:            !!cardiovascular.palpitaciones,
+      antecedente_familiar_ms:  !!cardiovascular.antecedente_familiar_ms,
+      hta_no_controlada:        !!cardiovascular.hta_no_controlada,
+      miocarditis_reciente:     !!cardiovascular.miocarditis_reciente,
+      wpw:                      !!cardiovascular.wpw,
+      bloqueo_av_mobitz2:       !!cardiovascular.bloqueo_av_mobitz2,
+      bloqueo_av_completo:      !!cardiovascular.bloqueo_av_completo,
+      extrasistoles_aisladas:   !!cardiovascular.extrasistoles_aisladas,
+      tvns_ev_complejas:        !!cardiovascular.tvns_ev_complejas,
+      soplo_cardiaco_patologico:!!cardiovascular.soplo_cardiaco_patologico,
+      qt_largo:                 !!cardiovascular.qt_largo,
+      brugada_tipo1:            !!cardiovascular.brugada_tipo1,
+      hcm_confirmada:           !!cardiovascular.hcm_confirmada,
+      canal_arritmia:           !!cardiovascular.canal_arritmia,
+      falla_vi:                 !!cardiovascular.falla_vi,
+      presion_art:              presion,
+      ecg_resultado:            ecg,
+      // Factores ateroscleróticos ≥ 35 años (C6)
+      tabaquismo:               !!cardiovascular.tabaquismo,
+      colesterol_alto:          !!cardiovascular.colesterol_alto,
+      diabetes_tipo2:           !!cardiovascular.diabetes_tipo2,
+      imc_elevado:              !!cardiovascular.imc_elevado,
+    },
+    respiratorio: {
+      disnea:            disnea,
+      sibilancias:       !!respiratorio.sibilancias,
+      asma:              asma,
+      caida_rendimiento: !!respiratorio.caida_rendimiento,
+      fev1:              fev1,
+    },
+    mental: {
+      ansiedad:   ansiedad,
+      sueno:      sueno,
+      burnout:    !!mental.burnout,
+      apsq_alto:  !!mental.apsq_alto,
+      autolesion: !!mental.autolesion,
+    },
+  };
+
+  return { isValid: true, errors: [], data: normalized };
+}
+
+
+
+
+// --- engine.js ---
+// src/clinical/engine.js — Motor de reglas clínicas Health Priority v1.1
+// CORRECCIONES AUDITORÍA v1.1:
+//   - P1: Las banderas rojas NO se puntúan adicionalmente (eliminado doble conteo)
+//   - P3: sincope_ejercicio dividido en sincope_esfuerzo_maximo (BR) y sincope_post_esfuerzo (ponderado)
+//   - C2: Regla combinada WPW + palpitaciones → bonus de 15 pts + aviso de derivación EEF
+//   - C6: Factores ateroscleróticos se evalúan cuando edad ≥ 35
+//   - M6: Score explicado como índice de tamizaje
+
+
+
+
+// ── UTILIDADES ────────────────────────────────────────────────────────────────
+
+function joinLabels(items) {
+  if (items.length === 0) return "";
+  if (items.length === 1) return items[0];
+  if (items.length === 2) return `${items[0]} y ${items[1]}`;
+  return `${items.slice(0, -1).join(", ")} y ${items[items.length - 1]}`;
+}
+
+function deduplicate(items) {
+  return [...new Set(items)];
+}
+
+// ── CLASIFICACIÓN ETARIA ──────────────────────────────────────────────────────
+function getAgeGroup(age) {
+  if (age <= 18) return AGE_GROUPS.JUVENIL;
+  if (age <= 24) return AGE_GROUPS.ADULTO_JV;
+  return AGE_GROUPS.PROFESIONAL;
+}
+
+// ── TRAZABILIDAD ──────────────────────────────────────────────────────────────
+function createTrace(ageGroup, edad, sexo) {
+  return {
+    grupo_etario:          ageGroup,
+    edad,
+    sexo,
+    aplica_35_plus:        edad >= 35,
+    bandera_roja_activada: false,
+    banderas_rojas:        [],
+    avisos_clinicos:       [],   // Avisos no-bloqueantes para el evaluador
+    factores_positivos: {
+      cardiovascular: [],
+      respiratorio:   [],
+      mental:         [],
+    },
+    factores_contextuales: [],
+    puntaje_por_dominio: {
+      cardiovascular: 0,
+      respiratorio:   0,
+      mental:         0,
+    },
+    detalle_puntaje:          [],
+    reglas_aplicadas:         [`Grupo etario: ${ageGroup} (edad ${edad}). Sexo: ${sexo}. Evaluación ≥ 35 años: ${edad >= 35}.`],
+    referencias_documentales: SCIENTIFIC_REFERENCES,
+    score_nota:               SCORE_DISCLAIMER,
+  };
+}
+
+function pushFactor(trace, domain, field, points, note) {
+  const label = FIELD_LABELS[field] || field;
+  trace.factores_positivos[domain].push(label);
+  trace.puntaje_por_dominio[domain] += points;
+  trace.detalle_puntaje.push({
+    dominio:  domain,
+    variable: field,
+    etiqueta: label,
+    puntos:   points,
+    nota:     note,
+  });
+}
+
+// ── EVALUACIÓN DE BANDERAS ROJAS ─────────────────────────────────────────────
+// Fuente: ESC 2020 §3; ACC 2015; SMHAT-1 (autolesión); GINA 2025 (FEV1 < 40 %)
+function evaluateRedFlags(data, trace) {
+  const { cardiovascular, mental } = data;
+
+  // Variables absolutas de la lista RED_FLAG_FIELDS
+  RED_FLAG_FIELDS.forEach((field) => {
+    const value =
+      cardiovascular[field] !== undefined ? cardiovascular[field] :
+      mental[field]         !== undefined ? mental[field] :
+      false;
+
+    if (value) {
+      trace.banderas_rojas.push(FIELD_LABELS[field] || field);
+    }
+  });
+
+  // Bandera roja adicional: HTA severa (ESC 2020 §HTA / AHA 2025)
+  if (cardiovascular.presion_art === "hta_severa") {
+    trace.banderas_rojas.push("HTA Severa / Crisis (≥ 160/100 mmHg)");
+  }
+
+  // Bandera roja adicional: ECG anormal (International ECG Criteria 2017)
+  if (cardiovascular.ecg_resultado === "anormal") {
+    trace.banderas_rojas.push(FIELD_LABELS.ecg_anormal_dx || "Hallazgos ECG anormales (Criterios 2017)");
+  }
+
+  // Bandera roja adicional: FEV1 < 40 % (GINA 2025)
+  if (data.respiratorio.fev1 === "severa_reduccion") {
+    trace.banderas_rojas.push("FEV1 < 40 % — riesgo respiratorio severo (GINA 2025)");
+  }
+
+  trace.bandera_roja_activada = trace.banderas_rojas.length > 0;
+  
+  // NUEVO v1.2.2: Aplicar puntos por banderas rojas para coherencia visual del índice
+  const numFlags = trace.banderas_rojas.length;
+  if (numFlags > 0) {
+    const rfPoints = RED_FLAG_SCORE.FIRST + (numFlags - 1) * RED_FLAG_SCORE.EXTRA;
+    pushFactor(trace, "cardiovascular", "red_flags_composite", rfPoints, 
+      "Puntuación por presencia de banderas rojas (Riesgo Crítico).");
+  }
+
+  trace.reglas_aplicadas.push(
+    trace.bandera_roja_activada
+      ? `Banderas rojas detectadas (${numFlags}): ${joinLabels(trace.banderas_rojas)}.`
+      : "Sin banderas rojas detectadas."
+  );
+}
+
+// ── PUNTUACIÓN CARDIOVASCULAR ─────────────────────────────────────────────────
+function scoreCardiovascular(cardio, trace, ageGroup, edad) {
+  const weights = CARDIO_WEIGHTS[ageGroup];
+
+  // Variables no-bandera ponderadas por grupo etario
+  Object.entries(weights).forEach(([field, points]) => {
+    if (cardio[field] === true) {
+      pushFactor(trace, "cardiovascular", field, points,
+        `Variable cardiovascular ponderada para grupo ${ageGroup}.`);
+    }
+  });
+
+  // ── REGLA COMBINADA: WPW + Palpitaciones (C2) ────────────────────────────
+  // ESC 2020: WPW sintomático → estudio electrofisiológico urgente.
+  if (cardio.wpw && cardio.palpitaciones) {
+    pushFactor(trace, "cardiovascular", "wpw_palpitaciones_combo",
+      WPW_PALPITACIONES_BONUS,
+      "Regla combinada: WPW + Palpitaciones. Derivar a electrofisiología (ESC 2020).");
+    trace.avisos_clinicos.push(
+      "⚠️ WPW con palpitaciones: derivación urgente a estudio electrofisiológico (EEF) — ESC 2020."
+    );
+  }
+
+  // ── Presión arterial ─────────────────────────────────────────────────────
+  if (cardio.presion_art && cardio.presion_art !== "normal") {
+    const pts = PA_WEIGHTS[cardio.presion_art] || 0;
+    if (pts > 0) {
+      pushFactor(trace, "cardiovascular", `presion_${cardio.presion_art}`, pts,
+        "Puntuación por presión arterial elevada (AHA/ACC 2025).");
+    }
+  }
+
+  // ── ECG ──────────────────────────────────────────────────────────────────
+  // Los cambios menores suman puntos; los anormales activan bandera roja (ya manejado)
+  // pero también suman en el score para consistencia visual
+  if (cardio.ecg_resultado && cardio.ecg_resultado !== "normal") {
+    const pts = ECG_WEIGHTS[cardio.ecg_resultado] || 0;
+    if (pts > 0) {
+      pushFactor(trace, "cardiovascular", `ecg_${cardio.ecg_resultado}`, pts,
+        "Puntuación adicional por resultado de ECG (Criterios Internacionales 2017).");
+    }
+  }
+
+  // ── Factores ateroscleróticos ≥ 35 años (C6) ────────────────────────────
+  if (edad >= 35) {
+    Object.entries(CARDIO_WEIGHTS_35_PLUS).forEach(([field, points]) => {
+      if (cardio[field] === true) {
+        pushFactor(trace, "cardiovascular", field, points,
+          `Factor aterosclerótico en deportista ≥ 35 años (ESC 2020 §35+).`);
+      }
+    });
+
+    // Aviso si hay 2+ factores ateroscleróticos positivos
+    const factoresAtero = Object.keys(CARDIO_WEIGHTS_35_PLUS).filter((k) => cardio[k] === true);
+    if (factoresAtero.length >= 2) {
+      trace.avisos_clinicos.push(
+        `⚠️ Deportista ≥ 35 años con ${factoresAtero.length} factores ateroscleróticos: considerar evaluación coronaria (Score de calcio / SCORE2).`
+      );
+    }
+  }
+
+  trace.reglas_aplicadas.push(
+    `Puntaje cardiovascular acumulado: ${trace.puntaje_por_dominio.cardiovascular}.`
+  );
+}
+
+// ── PUNTUACIÓN RESPIRATORIA ───────────────────────────────────────────────────
+// Fuente: GINA 2025, SEMED
+function scoreRespiratory(resp, trace) {
+  if (resp.disnea && resp.disnea !== "ninguna") {
+    pushFactor(trace, "respiratorio", `disnea_${resp.disnea}`,
+      RESPIRATORY_WEIGHTS.disnea[resp.disnea],
+      "Ponderación por intensidad de disnea (GINA 2025).");
+  }
+
+  if (resp.sibilancias) {
+    pushFactor(trace, "respiratorio", "sibilancias",
+      RESPIRATORY_WEIGHTS.sibilancias,
+      "Ponderación por sibilancias.");
+  }
+
+  if (resp.asma === "no_controlada") {
+    pushFactor(trace, "respiratorio", "asma_no_controlada",
+      RESPIRATORY_WEIGHTS.asma.no_controlada,
+      "Asma no controlada: riesgo de broncoconstricción inducida por esfuerzo (GINA 2025).");
+  } else if (resp.asma === "controlada") {
+    // Asma controlada no contraindica deporte: solo registro contextual (P5)
+    trace.factores_contextuales.push(FIELD_LABELS.asma_controlada);
+  }
+
+  if (resp.caida_rendimiento) {
+    pushFactor(trace, "respiratorio", "caida_rendimiento",
+      RESPIRATORY_WEIGHTS.caida_rendimiento,
+      "Caída del rendimiento (inespecífica — peso reducido; coexistencia requerida con síntomas respiratorios para mayor impacto).");
+  }
+
+  if (resp.fev1 && resp.fev1 !== "normal") {
+    const pts = RESPIRATORY_WEIGHTS.fev1[resp.fev1] || 0;
+    if (pts > 0) {
+      pushFactor(trace, "respiratorio", `fev1_${resp.fev1}`, pts,
+        `FEV1 reducido (${resp.fev1}): riesgo de exacerbación (GINA 2025).`);
+    }
+  }
+
+  trace.reglas_aplicadas.push(
+    `Puntaje respiratorio acumulado: ${trace.puntaje_por_dominio.respiratorio}.`
+  );
+}
+
+// ── PUNTUACIÓN MENTAL ─────────────────────────────────────────────────────────
+// Fuente: SMHAT-1, APSQ
+function scoreMental(mental, trace) {
+  if (mental.ansiedad && mental.ansiedad !== "ninguna") {
+    pushFactor(trace, "mental", `ansiedad_${mental.ansiedad}`,
+      MENTAL_WEIGHTS.ansiedad[mental.ansiedad],
+      `Ansiedad ${mental.ansiedad} — SMHAT-1.`);
+  }
+
+  if (mental.sueno === "alterado") {
+    pushFactor(trace, "mental", "sueno_alterado",
+      MENTAL_WEIGHTS.sueno.alterado,
+      "Sueño alterado — factor de bienestar deportivo.");
+  }
+
+  if (mental.burnout) {
+    pushFactor(trace, "mental", "burnout",
+      MENTAL_WEIGHTS.burnout,
+      "Burnout deportivo — APSQ / SMHAT-1.");
+  }
+
+  if (mental.apsq_alto) {
+    pushFactor(trace, "mental", "apsq_alto",
+      MENTAL_WEIGHTS.apsq_alto,
+      "Puntuación APSQ ≥ 17 — requiere evaluación más detallada (SMHAT-1).");
+  }
+
+  if (mental.autolesion) {
+    pushFactor(trace, "mental", "autolesion",
+      MENTAL_WEIGHTS.autolesion,
+      "PHQ-9 ítem 9 positivo — acción clínica inmediata obligatoria.");
+    trace.avisos_clinicos.push(
+      "🚨 CRISIS DE SALUD MENTAL: Pensamientos de autolesión detectados. No dejar al deportista sin acompañamiento. Derivar urgente a salud mental. Línea de crisis disponible en la pantalla de resultado."
+    );
+  }
+
+  trace.reglas_aplicadas.push(
+    `Puntaje mental acumulado: ${trace.puntaje_por_dominio.mental}.`
+  );
+}
+
+// ── NIVEL DE RIESGO ───────────────────────────────────────────────────────────
+function getRiskLevel(score) {
+  if (score >= SCORE_THRESHOLDS.ROJO) return "ROJO";
+  if (score > SCORE_THRESHOLDS.VERDE) return "AMARILLO";
+  return "VERDE";
+}
+
+// ── ESTUDIOS SUGERIDOS ────────────────────────────────────────────────────────
+function buildStudies(data, risk, trace) {
+  const out = [];
+  const cardio = data.cardiovascular;
+
+  // Cardiovascular
+  const cardioPositive = Object.entries(cardio).some(([k, v]) =>
+    k !== "presion_art" && k !== "ecg_resultado"
+      ? v === true
+      : (typeof v === "string" && v !== "normal")
+  );
+
+  if (cardioPositive) {
+    out.push(...DOMAIN_STUDIES[risk === "ROJO" ? "cardiovascular_alto" : "cardiovascular"]);
+  }
+
+  // WPW sintomático → estudio electrofisiológico
+  if (cardio.wpw && cardio.palpitaciones) {
+    out.push(...DOMAIN_STUDIES.wpw_sintomatico);
+  }
+
+  // Factores ateroscleróticos ≥ 35
+  if (trace.aplica_35_plus) {
+    const hasAtero = Object.keys(CARDIO_WEIGHTS_35_PLUS).some((k) => cardio[k] === true);
+    if (hasAtero) out.push(...DOMAIN_STUDIES.cardiovascular_35_plus);
+  }
+
+  // Respiratorio
+  const respPositive =
+    data.respiratorio.disnea !== "ninguna" ||
+    data.respiratorio.sibilancias ||
+    data.respiratorio.asma !== "no" ||
+    data.respiratorio.caida_rendimiento ||
+    (data.respiratorio.fev1 && data.respiratorio.fev1 !== "normal");
+
+  if (respPositive) out.push(...DOMAIN_STUDIES.respiratorio);
+
+  // Mental
+  const mentalPositive =
+    data.mental.ansiedad !== "ninguna" ||
+    data.mental.sueno === "alterado" ||
+    data.mental.burnout ||
+    data.mental.apsq_alto ||
+    data.mental.autolesion;
+
+  if (mentalPositive) {
+    out.push(...DOMAIN_STUDIES[data.mental.autolesion ? "mental_urgente" : "mental"]);
+  }
+
+  return deduplicate(out);
+}
+
+// ── EXPLICACIÓN CLÍNICA ───────────────────────────────────────────────────────
+function buildExplanation(risk, score, trace) {
+  const { descripcion } = RISK_META[risk];
+  const { bandera_roja_activada, banderas_rojas, detalle_puntaje, factores_contextuales, avisos_clinicos } = trace;
+
+  let base = "";
+
+  if (bandera_roja_activada) {
+    const supporters = detalle_puntaje
+      .filter((d) => !banderas_rojas.includes(d.etiqueta))
+      .sort((a, b) => b.puntos - a.puntos)
+      .slice(0, 3)
+      .map((d) => d.etiqueta);
+    const extra = supporters.length > 0 ? ` Se suman hallazgos: ${joinLabels(supporters)}.` : "";
+    base = `${descripcion} por criterio de exclusión: ${joinLabels(banderas_rojas)}.${extra}`;
+  } else {
+    const top = detalle_puntaje
+      .slice().sort((a, b) => b.puntos - a.puntos).slice(0, 4).map((d) => d.etiqueta);
+
+    if (top.length > 0) {
+      base = `${descripcion} (índice de tamizaje: ${score}/100). Variables determinantes: ${joinLabels(top)}.`;
+    } else if (factores_contextuales.length > 0) {
+      base = `${descripcion} sin variables puntuables activas. Factores contextuales: ${joinLabels(factores_contextuales)}.`;
+    } else {
+      base = `${descripcion} por ausencia de variables de riesgo en los tres dominios evaluados.`;
+    }
+  }
+
+  // Agregar avisos clínicos al final
+  if (avisos_clinicos.length > 0) {
+    base += ` | ${avisos_clinicos.join(" | ")}`;
+  }
+
+  return base;
+}
+
+// ── REGLA DE CLASIFICACIÓN FINAL ─────────────────────────────────────────────
+function buildFinalRule(risk, score, trace) {
+  if (trace.bandera_roja_activada) {
+    return `Clasificación final: ROJO por indicadores críticos detectados. Índice de Riesgo: ${score}/100.`;
+  }
+  if (score <= SCORE_THRESHOLDS.VERDE) return `Clasificación final: VERDE (índice ${score} ≤ ${SCORE_THRESHOLDS.VERDE}).`;
+  if (score <= SCORE_THRESHOLDS.AMARILLO) return `Clasificación final: AMARILLO (índice ${score} entre ${SCORE_THRESHOLDS.VERDE + 1}-${SCORE_THRESHOLDS.AMARILLO}).`;
+  return `Clasificación final: ROJO (índice ${score} ≥ ${SCORE_THRESHOLDS.ROJO}).`;
+}
+
+// ── FUNCIÓN PRINCIPAL ─────────────────────────────────────────────────────────
+function assessRisk(data) {
+  const ageGroup = getAgeGroup(data.edad);
+  const trace    = createTrace(ageGroup, data.edad, data.sexo);
+
+  // 1. Detectar banderas rojas (ahora suman puntos al score)
+  evaluateRedFlags(data, trace);
+
+  // 2. Puntuar dominios
+  scoreCardiovascular(data.cardiovascular, trace, ageGroup, data.edad);
+  scoreRespiratory(data.respiratorio, trace);
+  scoreMental(data.mental, trace);
+
+  // 3. Score total (cap 100)
+  const rawScore = Object.values(trace.puntaje_por_dominio).reduce((a, v) => a + v, 0);
+  const score    = Math.min(rawScore, 100);
+
+  // 4. Nivel de riesgo (basado pura y coherentemente en el Score)
+  const risk = getRiskLevel(score);
+  trace.reglas_aplicadas.push(buildFinalRule(risk, score, trace));
+
+
+  return {
+    riesgo:          risk,
+    score,
+    score_max:       100,
+    score_nota:      SCORE_DISCLAIMER,
+    probabilidad:    RISK_META[risk].probabilidad,
+    descripcion:     RISK_META[risk].descripcion,
+    explicacion:     buildExplanation(risk, score, trace),
+    estudios:        buildStudies(data, risk, trace),
+    recomendacion:   RISK_META[risk].recomendacion,
+    avisos_clinicos: trace.avisos_clinicos,
+    trazabilidad:    trace,
+  };
+}
+
+
+
+
+// --- app.js ---
+/**
+ * public/app.js — Lógica del frontend Health Priority v1.1
+ * CORRECCIONES AUDITORÍA v1.1:
+ *   - P4: Modal de disclaimer con confirmación obligatoria
+ *   - P6: window.alert() eliminado → panel de crisis permanente
+ *   - P3: Payload actualizado con sincope_esfuerzo_maximo / sincope_post_esfuerzo
+ *   - C6: Nuevos campos ateroscleróticos ≥ 35 años
+ *   - C2: Aviso WPW+palpitaciones visible en resultado (avisos_clinicos)
+ *   - M6: Score mostrado como "índice de tamizaje" con nota descriptiva
+ */
+
+
+// ── CASOS DE EJEMPLO ──────────────────────────────────────────────────────────
+
+
+// ── REFERENCIAS DOM ───────────────────────────────────────────────────────────
+const form         = document.getElementById("assessment-form");
+const submitBtn    = document.getElementById("submit-button");
+const resultCard   = document.getElementById("result-card");
+const resultEmpty  = document.getElementById("result-empty");
+const errorCard    = document.getElementById("error-card");
+const errorMsg     = document.getElementById("error-msg");
+const uploadZone   = document.getElementById("upload-zone");
+const fileInput    = document.getElementById("archivos");
+const fileList     = document.getElementById("file-list");
+const uploadStatus = document.getElementById("upload-status");
+const crisisPanel  = document.getElementById("crisis-panel");
+const seccion35    = document.getElementById("seccion_35_plus");
+const edadInput    = document.getElementById("edad");
+
+// ── MODAL DE DISCLAIMER (P4) ─────────────────────────────────────────────────
+const disclaimerModal = document.getElementById("disclaimer-modal");
+const disclaimerCheck = document.getElementById("disclaimer-check");
+const modalAcceptBtn  = document.getElementById("modal-accept-btn");
+
+disclaimerCheck.addEventListener("change", () => {
+  modalAcceptBtn.disabled = !disclaimerCheck.checked;
+});
+
+modalAcceptBtn.addEventListener("click", () => {
+  disclaimerModal.classList.add("modal-hidden");
+  disclaimerModal.setAttribute("aria-hidden", "true");
+});
+
+// ── SECCIÓN ≥ 35 AÑOS — mostrar condicionalmente ──────────────────────────────
+function updateSections35() {
+  const edad = Number(edadInput.value);
+  if (seccion35) seccion35.hidden = !(edad >= 35);
+}
+
+edadInput.addEventListener("input", updateSections35);
+
+// ── NAVEGACIÓN MULTI-PASO ─────────────────────────────────────────────────────
+let currentStep = 1;
+const TOTAL_STEPS = 5;
+
+function goToStep(step) {
+  if (step < 1 || step > TOTAL_STEPS) return;
+  if (step > currentStep && !validateCurrentStep()) return;
+
+  document.querySelectorAll(".form-step").forEach((s) => s.classList.remove("active"));
+  document.querySelector(`#step-${step}`).classList.add("active");
+
+  document.querySelectorAll(".step-btn").forEach((btn) => {
+    const n = Number(btn.dataset.step);
+    btn.classList.remove("active", "done");
+    if (n === step) btn.classList.add("active");
+    if (n < step)   btn.classList.add("done");
+  });
+
+  currentStep = step;
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
+function validateCurrentStep() {
+  const stepEl   = document.querySelector(`#step-${currentStep}`);
+  const required = stepEl.querySelectorAll("[required]");
+  let valid = true;
+
+  required.forEach((el) => {
+    el.classList.remove("invalid");
+    if (!el.value || el.value.trim() === "") {
+      el.classList.add("invalid");
+      if (valid) el.focus();
+      valid = false;
+    }
+  });
+
+  if (!valid) showInlineError("Por favor completa todos los campos obligatorios (marcados con *).");
+  return valid;
+}
+
+function showInlineError(msg) {
+  document.querySelectorAll(".inline-error").forEach((e) => e.remove());
+  const el = document.createElement("p");
+  el.className = "inline-error";
+  el.style.cssText = "color:#ef4444;font-size:.82rem;margin-top:.5rem;padding:0.5rem 0.85rem;";
+  el.textContent    = msg;
+  const stepEl = document.querySelector(`#step-${currentStep} .step-actions`);
+  if (stepEl) stepEl.before(el);
+  setTimeout(() => el.remove(), 3500);
+}
+
+document.querySelectorAll(".next-step").forEach((btn) => {
+  btn.addEventListener("click", () => goToStep(Number(btn.dataset.next)));
+});
+
+document.querySelectorAll(".prev-step").forEach((btn) => {
+  btn.addEventListener("click", () => {
+    currentStep = Number(btn.dataset.prev) + 1;
+    goToStep(Number(btn.dataset.prev));
+  });
+});
+
+document.querySelectorAll(".step-btn").forEach((btn) => {
+  btn.addEventListener("click", () => {
+    const target = Number(btn.dataset.step);
+    if (target < currentStep) { currentStep = target + 1; goToStep(target); }
+  });
+});
+
+// ── CONSTRUCCIÓN DEL PAYLOAD ──────────────────────────────────────────────────
+function buildPayload() {
+  const bool = (id) => document.getElementById(id)?.checked ?? false;
+  const val  = (id) => document.getElementById(id)?.value   ?? "";
+
+  return {
+    edad:            Number(val("edad")),
+    sexo:            val("sexo"),
+    nivel_deportivo: val("nivel_deportivo"),
+    cardiovascular: {
+      // Síncope — dividido (P3)
+      sincope_esfuerzo_maximo:  bool("sincope_esfuerzo_maximo"),
+      sincope_post_esfuerzo:    bool("sincope_post_esfuerzo"),
+      // Síntomas
+      dolor_toracico_ejercicio: bool("dolor_toracico_ejercicio"),
+      palpitaciones:            bool("palpitaciones"),
+      antecedente_familiar_ms:  bool("antecedente_familiar_ms"),
+      hta_no_controlada:        bool("hta_no_controlada"),
+      miocarditis_reciente:     bool("miocarditis_reciente"),
+      wpw:                      bool("wpw"),
+      bloqueo_av_mobitz2:       bool("bloqueo_av_mobitz2"),
+      bloqueo_av_completo:      bool("bloqueo_av_completo"),
+      extrasistoles_aisladas:   bool("extrasistoles_aisladas"),
+      tvns_ev_complejas:        bool("tvns_ev_complejas"),
+      soplo_cardiaco_patologico:bool("soplo_cardiaco_patologico"),
+      qt_largo:                 bool("qt_largo"),
+      brugada_tipo1:            bool("brugada_tipo1"),
+      hcm_confirmada:           bool("hcm_confirmada"),
+      canal_arritmia:           bool("canal_arritmia"),
+      falla_vi:                 bool("falla_vi"),
+      presion_art:              val("presion_art")   || "normal",
+      ecg_resultado:            val("ecg_resultado") || "normal",
+      // Factores ≥ 35 (C6)
+      tabaquismo:               bool("tabaquismo"),
+      colesterol_alto:          bool("colesterol_alto"),
+      diabetes_tipo2:           bool("diabetes_tipo2"),
+      imc_elevado:              bool("imc_elevado"),
+    },
+    respiratorio: {
+      disnea:            val("disnea")  || "ninguna",
+      sibilancias:       bool("sibilancias"),
+      asma:              val("asma")    || "no",
+      caida_rendimiento: bool("caida_rendimiento"),
+      fev1:              val("fev1")    || "normal",
+    },
+    mental: {
+      ansiedad:   val("ansiedad") || "ninguna",
+      sueno:      val("sueno")    || "normal",
+      burnout:    bool("burnout"),
+      apsq_alto:  bool("apsq_alto"),
+      autolesion: bool("autolesion"),
+    },
+  };
+}
+
+
+
+// Panel de crisis en tiempo real al marcar autolesión
+document.getElementById("autolesion")?.addEventListener("change", (e) => {
+  crisisPanel.hidden = !e.target.checked;
+  if (e.target.checked) crisisPanel.scrollIntoView({ behavior: "smooth" });
+});
+
+// ── ENVÍO DEL FORMULARIO ──────────────────────────────────────────────────────
+form.addEventListener("submit", async (e) => {
+  e.preventDefault();
+  if (!validateCurrentStep()) return;
+
+  setLoading(true);
+  hideError();
+
+  try {
+    const payload = buildPayload();
+
+    
+    const valRes = validateAssessmentInput(payload);
+    if (!valRes.isValid) throw new Error(valRes.errors.join(" "));
+    const riskData = assessRisk(valRes.data);
+    
+
+    // Carga de documentos
+    // Carga local ignorada en version portable
+
+    renderResult(riskData);
+
+  } catch (err) {
+    showError(err.message || "No fue posible calcular el riesgo. Revisa la conexión al servidor.");
+  } finally {
+    setLoading(false);
+  }
+});
+
+// ── RENDERIZADO DE RESULTADOS ─────────────────────────────────────────────────
+function renderResult(data) {
+  resultEmpty.hidden = true;
+  resultCard.hidden  = false;
+  errorCard.hidden   = true;
+  resultCard.className = `result-card risk-${data.riesgo}`;
+
+
+  // Llenar resumen del participante (NUEVO)
+  const nombreVal = document.getElementById("nombre")?.value || "Sin nombre";
+  const edadVal   = document.getElementById("edad")?.value   || "—";
+  const sexoVal   = document.getElementById("sexo")?.value   || "—";
+  const nivelVal  = document.getElementById("nivel_deportivo")?.value || "—";
+  
+  const resNombreVal = document.getElementById("resumen-nombre");
+  const resDetallesVal = document.getElementById("resumen-detalles");
+  if (resNombreVal) resNombreVal.textContent = nombreVal;
+  if (resDetallesVal) resDetallesVal.textContent = `${edadVal} años | ${sexoVal} | ${nivelVal}`;
+
+
+  // Semáforo
+  document.getElementById("risk-level-text").textContent = data.riesgo;
+  document.getElementById("risk-prob").textContent       = data.probabilidad;
+  document.querySelectorAll(".tl-light").forEach((light) => {
+    light.classList.remove("active");
+    if (light.dataset.light === data.riesgo) light.classList.add("active");
+  });
+
+  // Score + nota de índice (M6)
+  document.getElementById("score-num").textContent  = data.score;
+  document.getElementById("score-fill").style.width = `${Math.min(data.score, 100)}%`;
+  const notaEl = document.getElementById("score-nota");
+  if (notaEl && data.score_nota) notaEl.textContent = data.score_nota;
+
+  // Avisos clínicos (C2 WPW, C6 ≥35, autolesión)
+  const avisosBlock = document.getElementById("avisos-block");
+  const avisosList  = document.getElementById("avisos-list");
+  const avisos = data.avisos_clinicos || [];
+  if (avisos.length > 0) {
+    avisosBlock.hidden = false;
+    avisosList.innerHTML = "";
+    avisos.forEach((a) => {
+      const li = document.createElement("li");
+      li.textContent = a;
+      li.style.cssText = "color:#f59e0b;font-size:.82rem;margin-bottom:.35rem;";
+      avisosList.appendChild(li);
+    });
+  } else {
+    avisosBlock.hidden = true;
+  }
+
+  // Textos
+  document.getElementById("explicacion").textContent   = data.explicacion;
+  document.getElementById("recomendacion").textContent = data.recomendacion;
+
+  // Estudios
+  renderList("estudios-list", data.estudios, "Sin estudios adicionales sugeridos.");
+
+  // Desglose del Score (NUEVO v1.2.2)
+  const breakdownListOriginal = document.getElementById("breakdown-list-original");
+  if (breakdownListOriginal) {
+    breakdownListOriginal.innerHTML = "";
+    data.trazabilidad.detalles.forEach(item => {
+      const div = document.createElement("div");
+      div.className = "breakdown-item";
+      div.innerHTML = `
+        <span>${item.razon || item.factor}</span>
+        <span class="breakdown-pts">+${item.puntos}</span>
+      `;
+      breakdownListOriginal.appendChild(div);
+    });
+  }
+
+
+  // Trazabilidad
+  renderList("reglas-list", data.trazabilidad.reglas_aplicadas, "Sin reglas registradas.");
+
+  const dominios = Object.entries(data.trazabilidad.puntaje_por_dominio)
+    .map(([d, p]) => `${capitalize(d)}: ${p} pts`);
+  renderList("dominios-list", dominios, "Sin datos.");
+
+  const factores = [
+    ...Object.entries(data.trazabilidad.factores_positivos)
+      .flatMap(([d, arr]) => arr.map((f) => `${capitalize(d)}: ${f}`)),
+    ...(data.trazabilidad.factores_contextuales || []).map((f) => `Contextual: ${f}`),
+  ];
+  renderList("factores-list", factores, "Sin factores detectados.");
+
+  // Timestamp
+  document.getElementById("result-timestamp").textContent =
+    new Date().toLocaleString("es-CO", { dateStyle: "medium", timeStyle: "short" });
+
+  // Panel de crisis — P6: permanente, no alert()
+  const tieneAutolesion = (data.trazabilidad.factores_positivos?.mental || [])
+    .some((f) => f.toLowerCase().includes("autolesión") || f.toLowerCase().includes("autolesion"));
+  crisisPanel.hidden = !tieneAutolesion;
+
+  // Scroll al resultado en móvil
+  if (window.innerWidth < 1024) {
+    document.getElementById("result-panel").scrollIntoView({ behavior: "smooth" });
+  }
+}
+
+function renderList(id, items, emptyMsg) {
+  const ul = document.getElementById(id);
+  if (!ul) return;
+  ul.innerHTML = "";
+  const list = items && items.length > 0 ? items : [emptyMsg];
+  list.forEach((item) => {
+    const li = document.createElement("li");
+    li.textContent = item;
+    ul.appendChild(li);
+  });
+}
+
+function capitalize(str) {
+  return str.charAt(0).toUpperCase() + str.slice(1);
+}
+
+// ── CARGA DE DOCUMENTOS ───────────────────────────────────────────────────────
+async function uploadDocuments(files) {
+  const formData = new FormData();
+  Array.from(files).forEach((file) => formData.append("archivos", file));
+
+  uploadStatus.hidden    = false;
+  uploadStatus.className = "upload-status";
+  uploadStatus.textContent = "Subiendo documentos…";
+
+  try {
+    const res  = await fetch("/api/documentos", { method: "POST", body: formData });
+    const data = await res.json();
+    if (!res.ok) throw new Error(data.error || "Error al subir archivos.");
+    uploadStatus.className   = "upload-status success";
+    uploadStatus.textContent = `✅ ${data.total} documento(s) recibido(s) correctamente.`;
+  } catch (err) {
+    uploadStatus.className   = "upload-status error";
+    uploadStatus.textContent = `⚠️ ${err.message}`;
+  }
+}
+
+// ── ZONA DE CARGA (drag & drop) ───────────────────────────────────────────────
+uploadZone.addEventListener("dragover",  (e) => { e.preventDefault(); uploadZone.classList.add("drag-over"); });
+uploadZone.addEventListener("dragleave", ()  => uploadZone.classList.remove("drag-over"));
+uploadZone.addEventListener("drop",      (e) => {
+  e.preventDefault();
+  uploadZone.classList.remove("drag-over");
+  fileInput.files = e.dataTransfer.files;
+  renderFileList(e.dataTransfer.files);
+});
+fileInput.addEventListener("change", () => renderFileList(fileInput.files));
+
+function renderFileList(files) {
+  if (!files || files.length === 0) { fileList.hidden = true; return; }
+  fileList.hidden  = false;
+  fileList.innerHTML = "";
+  Array.from(files).forEach((file) => {
+    const div  = document.createElement("div");
+    div.className = "file-item";
+    const icon = file.type === "application/pdf" ? "📄" : "🖼️";
+    const kb   = Math.round(file.size / 1024);
+    div.innerHTML = `<span class="file-item-icon">${icon}</span><span>${file.name} — ${kb} KB</span>`;
+    fileList.appendChild(div);
+  });
+}
+
+// ── RESET ─────────────────────────────────────────────────────────────────────
+document.getElementById("reset-btn").addEventListener("click", () => {
+  form.reset();
+  resultCard.hidden   = true;
+  resultEmpty.hidden  = false;
+  errorCard.hidden    = true;
+  fileList.hidden     = true;
+  uploadStatus.hidden = true;
+  crisisPanel.hidden  = true;
+  if (seccion35) seccion35.hidden = true;
+  currentStep = 2;
+  goToStep(1);
+});
+
+// ── IMPRIMIR ──────────────────────────────────────────────────────────────────
+document.getElementById("print-btn").addEventListener("click", () => window.print());
+
+// ── ESTADO DE CARGA ───────────────────────────────────────────────────────────
+function setLoading(loading) {
+  submitBtn.disabled = loading;
+  submitBtn.classList.toggle("loading", loading);
+  const icon = submitBtn.querySelector(".btn-cta-icon");
+  const txt  = submitBtn.childNodes[1];
+  if (icon) icon.textContent = loading ? "" : "⚡";
+  if (txt)  txt.textContent  = loading ? " Calculando…" : " Calcular Riesgo";
+}
+
+function showError(msg) {
+  resultEmpty.hidden = true;
+  resultCard.hidden  = true;
+  errorCard.hidden   = false;
+  errorMsg.textContent = msg;
+}
+
+function hideError() { errorCard.hidden = true; }
+
+// ── SERVICE WORKER (PWA) ──────────────────────────────────────────────────────
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", () => {
+    navigator.serviceWorker.register("/sw.js").catch(() => {});
+  });
+}
+
+</script>
+
+</body>
+</html>
