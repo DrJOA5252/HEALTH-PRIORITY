@@ -6,114 +6,29 @@
   <title>Health Priority | HUB Principal</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
   <style>
-    :root {
-      --bg: #0b1120;
-      --card: #1e293b;
-      --accent: #6366f1;
-      --text: #f1f5f9;
-      --text-dim: #94a3b8;
-    }
-    body {
-      font-family: 'Inter', sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      min-height: 100vh;
-      margin: 0;
-      padding: 1.5rem;
-    }
-    .container {
-      max-width: 400px;
-      width: 100%;
-      text-align: center;
-    }
-    .logo {
-      font-size: 3.5rem;
-      margin-bottom: 0.5rem;
-      filter: drop-shadow(0 0 10px rgba(99,102,241,0.4));
-    }
-    h1 {
-      font-size: 1.5rem;
-      font-weight: 800;
-      letter-spacing: -0.5px;
-      margin-bottom: 2rem;
-    }
-    .menu {
-      display: grid;
-      gap: 1rem;
-    }
-    .btn {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      padding: 1.25rem;
-      border-radius: 16px;
-      text-decoration: none;
-      font-weight: 600;
-      transition: all 0.2s ease;
-      background: var(--card);
-      color: var(--text);
-      border: 1px solid rgba(255,255,255,0.05);
-    }
-    .btn:active {
-      transform: scale(0.96);
-      background: rgba(255,255,255,0.05);
-    }
-    .btn-intake {
-      background: var(--accent);
-      box-shadow: 0 4px 14px rgba(99,102,241,0.4);
-    }
-    .btn-sub {
-      font-size: 0.75rem;
-      font-weight: 400;
-      color: rgba(255,255,255,0.7);
-      margin-top: 0.25rem;
-    }
-    .footer {
-      margin-top: 3rem;
-      font-size: 0.7rem;
-      color: var(--text-dim);
-      text-transform: uppercase;
-      letter-spacing: 1px;
-    }
-    .guides-link {
-        font-size: 0.8rem;
-        margin-top: 2rem;
-        color: var(--accent);
-        text-decoration: none;
-        opacity: 0.8;
-    }
-    .guides-link:hover { opacity: 1; text-decoration: underline; }
+    :root { --bg: #0b1120; --card: #1e293b; --accent: #6366f1; --text: #f1f5f9; }
+    body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 100vh; margin: 0; padding: 1.5rem; }
+    .logo { font-size: 3.5rem; margin-bottom: 0.5rem; }
+    h1 { font-size: 1.5rem; font-weight: 800; margin-bottom: 2rem; }
+    .menu { display: grid; gap: 1rem; width: 100%; max-width: 320px; }
+    .btn { display: block; padding: 1.25rem; border-radius: 16px; text-decoration: none; font-weight: 600; text-align: center; background: var(--card); color: var(--text); border: 1px solid rgba(255,255,255,0.05); }
+    .btn-intake { background: var(--accent); }
+    .btn-sub { display: block; font-size: 0.75rem; font-weight: 400; opacity: 0.7; margin-top: 5px; }
   </style>
 </head>
 <body>
-  <div class="container">
     <div class="logo">❤️</div>
     <h1>HEALTH PRIORITY</h1>
-    
     <div class="menu">
       <a href="health_priority_intake.html" class="btn btn-intake">
         <span>🚀 Versión INTAKE</span>
-        <span class="btn-sub">Para Personal de Staff / Coaches</span>
+        <span class="btn-sub">Para Personal de Staff</span>
       </a>
-      <a href="salud_priority_portable.html" class="btn">
+      <!-- NOMBRE CORREGIDO AQUÍ ABAJO -->
+      <a href="health_priority_portable.html" class="btn">
         <span>🩺 Versión CLÍNICA</span>
-        <span class="btn-sub">Para Evaluación por Especialista</span>
+        <span class="btn-sub">Para Evaluación Médica</span>
       </a>
     </div>
-
-    <div style="display: flex; gap: 1rem; justify-content: center; margin-top: 1.5rem;">
-        <a href="guia_intake.html" class="guides-link">📖 Guía Staff</a>
-        <a href="guia_clinica.html" class="guides-link">📖 Guía Médica</a>
-    </div>
-    
-    <div class="footer">
-      DR. JOA5252 — PROTOCOLO 2026
-    </div>
-  </div>
 </body>
 </html>
