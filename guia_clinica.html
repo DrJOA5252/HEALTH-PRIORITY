@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Guía de Usuario | Health Priority CLÍNICA</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #4f46e5;
+      --bg: #0b1120;
+      --surface: #1e293b;
+      --text: #f1f5f9;
+      --text-dim: #94a3b8;
+      --red: #ef4444;
+      --yellow: #f59e0b;
+      --green: #22c55e;
+    }
+    body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; margin: 0; padding: 2rem; }
+    .container { max-width: 850px; margin: 0 auto; background: var(--surface); padding: 2.5rem; border-radius: 16px; box-shadow: 0 10px 40px rgba(0,0,0,0.4); }
+    header { border-bottom: 3px solid var(--primary); padding-bottom: 1rem; margin-bottom: 2rem; }
+    h1 { margin: 0; color: var(--primary); font-size: 1.8rem; }
+    .badge { background: var(--primary); color: white; padding: 0.2rem 0.6rem; border-radius: 4px; font-size: 0.75rem; vertical-align: middle; }
+    h2 { color: var(--text); border-left: 4px solid var(--primary); padding-left: 1rem; margin-top: 2.5rem; font-size: 1.3rem; }
+    p, li { color: var(--text-dim); }
+    strong { color: var(--text); }
+    .protocol-box { border: 1px solid var(--text-dim); padding: 1.5rem; border-radius: 8px; margin-top: 2rem; background: rgba(0,0,0,0.1); }
+    .protocol-title { font-weight: 700; margin-bottom: 0.5rem; color: var(--primary); }
+    .score-scale { display: flex; gap: 1rem; margin-top: 1rem; }
+    .scale-item { flex: 1; padding: 1rem; border-radius: 8px; text-align: center; font-weight: 700; font-size: 0.8rem; }
+    .bg-green { background: rgba(34,197,94,0.2); color: var(--green); }
+    .bg-yellow { background: rgba(245,158,11,0.2); color: var(--yellow); }
+    .bg-red { background: rgba(239,68,68,0.2); color: var(--red); }
+    .medical-note { font-size: 0.85rem; border-left: 2px solid var(--red); padding-left: 1rem; color: var(--red); margin-top: 1rem; }
+    footer { margin-top: 3rem; font-size: 0.8rem; color: var(--text-dim); text-align: center; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 1rem; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Health Priority — CLÍNICA <span class="badge">PROFESIONAL</span></h1>
+      <p>Guía de uso para Médicos Deportólogos, Cardiólogos y Especialistas</p>
+    </header>
+
+    <p>Esta versión es el **estándar clínico definitivo** para la estratificación del riesgo cardiovascular y respiratorio del deportista de élite. Utiliza criterios médicos rigorosos para la toma de decisión clínica sobre el **Apto Médico**.</p>
+
+    <h2>1. ¿Cuándo utilizar esta versión?</h2>
+    <ul>
+      <li>En los **Pre-Participación Deportiva (PPE)** anuales o semestrales.</li>
+      <li>Para el seguimiento de jugadores con **hallazgos previos** o bajo sospecha clínica.</li>
+      <li>Al recibir un reporte de la App Intake que haya arrojado **Alerta Roja**.</li>
+    </ul>
+
+    <h2>2. Flujo Clínico con Integración de Estudios</h2>
+    
+    <p>A diferencia de la versión Intake, aquí el médico debe ingresar datos técnicos:</p>
+    <ul>
+      <li><strong>AHA/ACC 2025:</strong> Categorice la presión arterial según los últimos umbrales (Ej. Estadio 1: 130-139 / 80-89 mmHg).</li>
+      <li><strong>ECG (Marit et al. 2017):</strong> Ingrese si el hallazgo es normal, cambios menores benignos o hallazgo anormal patológico.</li>
+      <li><strong>Espirometría (GINA 2025):</strong> Evalúe el valor de FEV1 (%) para obtener una ponderación precisa del riesgo obstructivo.</li>
+    </ul>
+
+    <h2>3. Lógica del Índice de Riesgo Unificado (v1.2.2)</h2>
+    <div class="score-scale">
+      <div class="scale-item bg-green">0 - 24<br>BAJO</div>
+      <div class="scale-item bg-yellow">25 - 59<br>MEDIO</div>
+      <div class="scale-item bg-red">60 - 100<br>ALTO / CRÍTICO</div>
+    </div>
+    
+    <div class="medical-note">
+      <strong>RECORDATORIO CLÍNICO:</strong> Una Bandera Roja (🚩) otorga automáticamente **60 puntos**. Esto asegura que el médico reciba una alerta visual prominente ante cualquier contraindicación absoluta (ESC 2020), tales como Síncope durante el esfuerzo, Dolor Torácico de origen anginoso o Antecedente familiar de MS.
+    </div>
+
+    <h2>4. Acciones y Seguimiento</h2>
+    <div class="protocol-box">
+      <div class="protocol-title">DECISIÓN CLÍNICA SOBRE EL "APTO"</div>
+      <p>1. <strong>VERDE:</strong> Apto Competitivo. Control anual sugerido.<br>
+         2. <strong>AMARILLO:</strong> Apto condicionado a estudios (Ecocardio, Prueba de esfuerzo). Control en ≤ 4 sem.<br>
+         3. <strong>ROJO:</strong> No Apto Preventivo. Derivación inmediata a cardiología deportiva especializada / EEF.</p>
+    </div>
+
+    <footer>
+      Health Priority v1.2.2 | Guía Médica Profesional | Basado en ESC 2020, AHA/ACC 2025 y SMHAT-1.
+    </footer>
+  </div>
+</body>
+</html>

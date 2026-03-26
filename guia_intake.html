@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Guía de Usuario | Health Priority INTAKE</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #6366f1;
+      --bg: #0f172a;
+      --surface: #1e293b;
+      --text: #f1f5f9;
+      --text-dim: #94a3b8;
+      --red: #ef4444;
+      --yellow: #f59e0b;
+      --green: #22c55e;
+    }
+    body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; margin: 0; padding: 2rem; }
+    .container { max-width: 800px; margin: 0 auto; background: var(--surface); padding: 2.5rem; border-radius: 16px; box-shadow: 0 10px 30px rgba(0,0,0,0.3); }
+    header { border-bottom: 2px solid var(--primary); padding-bottom: 1rem; margin-bottom: 2rem; }
+    h1 { margin: 0; color: var(--primary); font-size: 1.8rem; }
+    .badge { background: var(--red); color: white; padding: 0.2rem 0.6rem; border-radius: 4px; font-size: 0.75rem; vertical-align: middle; }
+    h2 { color: var(--text); border-left: 4px solid var(--primary); padding-left: 1rem; margin-top: 2rem; font-size: 1.3rem; }
+    p, li { color: var(--text-dim); }
+    strong { color: var(--text); }
+    .step { background: rgba(255,255,255,0.03); padding: 1.5rem; border-radius: 8px; margin-bottom: 1rem; border-left: 4px solid var(--text-dim); }
+    .step-num { font-weight: 800; color: var(--primary); margin-right: 0.5rem; }
+    .protocol-box { border: 2px dashed var(--red); padding: 1.5rem; border-radius: 8px; margin-top: 2rem; }
+    .protocol-title { color: var(--red); font-weight: 700; margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.5rem; }
+    .score-scale { display: flex; gap: 1rem; margin-top: 1rem; }
+    .scale-item { flex: 1; padding: 1rem; border-radius: 8px; text-align: center; font-weight: 700; font-size: 0.8rem; }
+    .bg-green { background: rgba(34,197,94,0.2); color: var(--green); }
+    .bg-yellow { background: rgba(245,158,11,0.2); color: var(--yellow); }
+    .bg-red { background: rgba(239,68,68,0.2); color: var(--red); }
+    footer { margin-top: 3rem; font-size: 0.8rem; color: var(--text-dim); text-align: center; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 1rem; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Health Priority — INTAKE <span class="badge">PREVENTIVO</span></h1>
+      <p>Guía de uso para Personal de Staff (Entrenadores, Fisios y Apoyo Administrativo)</p>
+    </header>
+
+    <p>Esta herramienta ha sido diseñada para la **identificación temprana** de riesgos en deportistas utilizando un lenguaje sencillo. Su objetivo no es diagnosticar, sino generar alertas que guíen una valoración médica profesional.</p>
+
+    <h2>1. ¿Cuándo utilizar esta versión?</h2>
+    <ul>
+      <li>Durante el proceso de **ingreso (intake)** de nuevos jugadores.</li>
+      <li>En **monitoreos de bienestar semanal** o tras episodios de fatiga inusual.</li>
+      <li>Cuando el deportista presente síntomas como palpitaciones o mareos leves.</li>
+    </ul>
+
+    <h2>2. Paso a Paso para el Evaluador</h2>
+    
+    <div class="step">
+      <p><span class="step-num">01</span> <strong>Preparación:</strong> Abra el archivo <code>health_priority_intake.html</code>. El deportista debe estar tranquilo y responder con honestidad.</p>
+    </div>
+    <div class="step">
+      <p><span class="step-num">02</span> <strong>Entrevista:</strong> Lea las preguntas exactamente como aparecen. Están diseñadas para ser comprensibles. Marque los recuadros si el deportista confirma haber sentido el síntoma.</p>
+    </div>
+    <div class="step">
+      <p><span class="step-num">03</span> <strong>Generación:</strong> Al terminar el Paso 4 (Bienestar), presione "Generar Predicción". El sistema procesará las respuestas bajo guías clínicas actualizadas.</p>
+    </div>
+
+    <h2>3. Interpretación del Índice de Riesgo (0-100)</h2>
+    <div class="score-scale">
+      <div class="scale-item bg-green">0 - 24<br>TENDENCIA BAJA</div>
+      <div class="scale-item bg-yellow">25 - 59<br>TENDENCIA MEDIA</div>
+      <div class="scale-item bg-red">60 - 100<br>ALERTA PREVENTIVA</div>
+    </div>
+    <p style="margin-top: 1rem;"><strong>Importante:</strong> Cualquier síntoma crítico (🚩) llevará el puntaje automáticamente al color <strong>ROJO</strong> (>= 60), indicando que el jugador no debe realizar esfuerzos máximos hoy.</p>
+
+    <div class="protocol-box">
+      <div class="protocol-title">🚩 PROTOCOLO ANTE ALERTA ROJA</div>
+      <p>1. <strong>Registro:</strong> Descargue el reporte en PDF/Foto.<br>
+         2. <strong>Acción:</strong> Informe de inmediato al Médico del Equipo o Coordinador Médico.<br>
+         3. <strong>Seguridad:</strong> Se recomienda no realizar entrenamiento de alta intensidad hasta el aval médico oficial.</p>
+    </div>
+
+    <footer>
+      Health Priority v1.2.2 | Basado en Guías AHA 2025 y ESC 2020.
+    </footer>
+  </div>
+</body>
+</html>
